@@ -157,7 +157,8 @@ MonoBehaviour:
   spaceBetweenCells: 1.1
   cell: {fileID: 11400000, guid: e2c8897ecd20dc34f925315f6344c798, type: 2}
   startItem: {fileID: 11400000, guid: 73de0089b83ebc7499b556cee6c184fb, type: 2}
-  startCountItems: 4
+  startCountItems: 2
+  timeBetweenSpawn: 2
 --- !u!4 &586617787
 Transform:
   m_ObjectHideFlags: 0

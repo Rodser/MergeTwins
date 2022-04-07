@@ -13,11 +13,14 @@ namespace MiniIT.Test
 		[SerializeField] private int height = 3;
         [SerializeField] private float spaceBetweenCells = 2f;
 		[SerializeField] private Cell cell = null;
-        
+
         [Header("Start configuration")]
         [SerializeField] private Item startItem;
         [SerializeField] private int startCountItems;
-
+        
+        [Header("Time")]
+        [SerializeField] private float timeBetweenSpawn = 1f;
+        
         private Cell[] grid = null;
         private bool hasCompiled = false;
 
@@ -33,7 +36,18 @@ namespace MiniIT.Test
             {
                 yield return null;
             }
-            SpawnItems();
+            
+            SpawnItems(startCountItems);
+            StartCoroutine(SpawnItemReapitRoutine());
+        }
+
+        private IEnumerator SpawnItemReapitRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(timeBetweenSpawn);
+                SpawnItems(1);
+            }
         }
 
         private void GreateGrid()
@@ -47,6 +61,7 @@ namespace MiniIT.Test
                     CreateCell(x, z, i++);
                 }
             }
+            
             hasCompiled = true;
         }
 
@@ -64,21 +79,27 @@ namespace MiniIT.Test
             grid[number].Initialization(positionCell, transform);
         }
 
-        private void SpawnItems()
+        private void SpawnItems(int countItems)
         {
             List<Cell> freeCells = new();
 
-            for (int i = 0; i < startCountItems; i++)
+            for (int i = 0; i < countItems; i++)
             {
                 freeCells.AddRange(from Cell cell in grid
                                    where cell.IsFree
                                    select cell);
+                
                 RandomSpawn(freeCells);
             }
         }
 
         private void RandomSpawn(List<Cell> cells)
         {
+            if (cells.Count == 0)
+            {
+                return;
+            }
+            
             int lucky = UnityEngine.Random.Range(0, cells.Count);
             grid[cells[lucky].Number].SpawnItem(startItem);
         }
