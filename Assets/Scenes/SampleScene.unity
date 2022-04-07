@@ -155,7 +155,9 @@ MonoBehaviour:
   width: 3
   height: 3
   spaceBetweenCells: 1.1
-  prefabCell: {fileID: -5046785769338788411, guid: 4a38b0a6edf49d34695732ac737f157d, type: 3}
+  cell: {fileID: 11400000, guid: e2c8897ecd20dc34f925315f6344c798, type: 2}
+  startItem: {fileID: 11400000, guid: 73de0089b83ebc7499b556cee6c184fb, type: 2}
+  startCountItems: 4
 --- !u!4 &586617787
 Transform:
   m_ObjectHideFlags: 0

@@ -1,20 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using MiniIT.Test.Items;
 
 namespace MiniIT.Test
 {
 	public class Grid : MonoBehaviour
 	{
-        [Header("Setting up the grid")]
-		[SerializeField] private int	 width = 3;
-		[SerializeField] private int	 height = 3;
-        [SerializeField] private float	 spaceBetweenCells = 2f;
-		[SerializeField] private Cell	 prefabCell = null;
+        [Header("Configuration of Grid")]
+		[SerializeField] private int width = 3;
+		[SerializeField] private int height = 3;
+        [SerializeField] private float spaceBetweenCells = 2f;
+		[SerializeField] private Cell cell = null;
+        
+        [Header("Start configuration")]
+        [SerializeField] private Item startItem;
+        [SerializeField] private int startCountItems;
 
-		private Cell[] grid = null;
+        private Cell[] grid = null;
+        private bool hasCompiled = false;
 
-		private void Awake()
+        private void Awake()
         {
             GreateGrid();
+            StartCoroutine(SpawnItemsRoutine());
+        }
+
+        private IEnumerator SpawnItemsRoutine()
+        {
+            while (!hasCompiled)
+            {
+                yield return null;
+            }
+            SpawnItems();
         }
 
         private void GreateGrid()
@@ -28,18 +47,40 @@ namespace MiniIT.Test
                     CreateCell(x, z, i++);
                 }
             }
+            hasCompiled = true;
         }
 
-        private void CreateCell(int x, int z, int v)
+        private void CreateCell(int x, int z, int number)
         {
-			Vector3 positionCell = new Vector3();
-			positionCell.x = x * spaceBetweenCells;
-			positionCell.y = 0f;
-			positionCell.z = z * spaceBetweenCells;
+            Vector3 positionCell = new Vector3
+            {
+                x = x * spaceBetweenCells,
+                y = 0f,
+                z = z * spaceBetweenCells
+            };
 
-			grid[v] = Instantiate<Cell>(prefabCell);			
-			grid[v].transform.SetParent(transform, false);
-            grid[v].transform.localPosition = positionCell;
-		}
+            grid[number] = cell.CloneCell();
+            grid[number].Number = number;
+            grid[number].Initialization(positionCell, transform);
+        }
+
+        private void SpawnItems()
+        {
+            List<Cell> freeCells = new();
+
+            for (int i = 0; i < startCountItems; i++)
+            {
+                freeCells.AddRange(from Cell cell in grid
+                                   where cell.IsFree
+                                   select cell);
+                RandomSpawn(freeCells);
+            }
+        }
+
+        private void RandomSpawn(List<Cell> cells)
+        {
+            int lucky = UnityEngine.Random.Range(0, cells.Count);
+            grid[cells[lucky].Number].SpawnItem(startItem);
+        }
     }
 }
