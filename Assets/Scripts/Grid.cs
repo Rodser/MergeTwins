@@ -24,9 +24,9 @@ namespace MiniIT.Test
         private Cell[] grid = null;
         private bool hasCompiled = false;
 
-        private void Awake()
+        public void CreateGrid()
         {
-            GreateGrid();
+            BuilderGrid();
             StartCoroutine(SpawnItemsRoutine());
         }
 
@@ -50,9 +50,9 @@ namespace MiniIT.Test
             }
         }
 
-        private void GreateGrid()
+        private void BuilderGrid()
         {
-            grid = new Cell[height * width];
+            this.grid = new Cell[height * width];
 
             for (int z = 0, i = 0; z < height; z++)
             {
@@ -62,7 +62,7 @@ namespace MiniIT.Test
                 }
             }
             
-            hasCompiled = true;
+            this.hasCompiled = true;
         }
 
         private void CreateCell(int x, int z, int number)
@@ -74,9 +74,9 @@ namespace MiniIT.Test
                 z = z * spaceBetweenCells
             };
 
-            grid[number] = cell.CloneCell();
-            grid[number].Number = number;
-            grid[number].Initialization(positionCell, transform);
+            this.grid[number] = this.cell.CloneCell();
+            this.grid[number].Number = number;
+            this.grid[number].Initialization(positionCell, this.transform);
         }
 
         private void SpawnItems(int countItems)
@@ -85,7 +85,7 @@ namespace MiniIT.Test
 
             for (int i = 0; i < countItems; i++)
             {
-                freeCells.AddRange(from Cell cell in grid
+                freeCells.AddRange(from Cell cell in this.grid
                                    where cell.IsFree
                                    select cell);
                 
@@ -101,7 +101,7 @@ namespace MiniIT.Test
             }
             
             int lucky = UnityEngine.Random.Range(0, cells.Count);
-            grid[cells[lucky].Number].SpawnItem(startItem);
+            this.grid[cells[lucky].Number].SpawnItem(this.startItem);
         }
     }
 }

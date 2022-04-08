@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MiniIT.Test
 {
     [CreateAssetMenu(fileName = "Cell", menuName = "Game/Cell", order = 0)]
-    internal class Cell : ScriptableObject
+    public class Cell : ScriptableObject
     {
         [SerializeField] private Ground ground = null;
 
@@ -27,14 +27,14 @@ namespace MiniIT.Test
         public Cell CloneCell()
         {
             Cell newCell = ScriptableObject.CreateInstance<Cell>();
-            newCell.ground = ground;
+            newCell.ground = this.ground;
             return newCell;
         }
 
         internal void SpawnItem(Item item)
         {
             this.item = item;
-            item.Spawn(position);
+            this.item.Spawn(this, this.position);
             this.isFree = false;
         }
     }
