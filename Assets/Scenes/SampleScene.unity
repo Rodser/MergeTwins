@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 3
-  height: 3
-  spaceBetweenCells: 2
+  height: 5
+  spaceBetweenCells: 1.1
   cell: {fileID: 11400000, guid: e2c8897ecd20dc34f925315f6344c798, type: 2}
   startItem: {fileID: 11400000, guid: 73de0089b83ebc7499b556cee6c184fb, type: 2}
   startCountItems: 2

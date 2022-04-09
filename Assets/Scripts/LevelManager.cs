@@ -10,7 +10,7 @@ namespace MiniIT.Test
 
         public Item GetItem(int level)
         {
-            return this.items[level];
+            return level >= this.items.Length ? null : this.items[level];
         }
     }
 }
