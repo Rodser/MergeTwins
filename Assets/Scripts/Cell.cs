@@ -17,6 +17,7 @@ namespace MiniIT.Test
         public int Number { get; set; }
         public Ground Ground => ground;
         public Item Item => item;
+        public Vector3 Position => position;
 
         public void Initialization(Vector3 position, Transform parent)
         {
@@ -31,10 +32,16 @@ namespace MiniIT.Test
             return newCell;
         }
 
+        public void BecomeFree()
+        {
+            this.isFree = true;
+            this.item = null;
+        }
+
         internal void SpawnItem(Item item)
         {
             this.item = item;
-            this.item.Spawn(this, this.position);
+            this.item.Spawn(this, this.Position);
             this.isFree = false;
         }
     }
