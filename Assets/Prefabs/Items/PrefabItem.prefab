@@ -79,8 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 4024600768274971129}
   animator: {fileID: 3505367726676952657}
-  speedMergeItems: 0.82
-  speedMove: 0.61
+  timeOfMerge: 0.4
+  speedMove: 0.4
 --- !u!114 &4929043644355460897
 MonoBehaviour:
   m_ObjectHideFlags: 0

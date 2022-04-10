@@ -7,41 +7,41 @@ namespace MiniIT.Test
     [CreateAssetMenu(fileName = "Cell", menuName = "Game/Cell", order = 0)]
     public class Cell : ScriptableObject
     {
-        [SerializeField] private Ground ground = null;
+        [SerializeField] private GroundAsset groundAsset = null;
 
-        private Item item = null;
+        private ItemAsset itemAsset = null;
         private Vector3 position;
         private bool isFree = true;
 
         public bool IsFree => isFree;
         public int Number { get; set; }
-        public Ground Ground => ground;
-        public Item Item => item;
+        public GroundAsset GroundAsset => groundAsset;
+        public ItemAsset ItemAsset => itemAsset;
         public Vector3 Position => position;
 
         public void Initialization(Vector3 position, Transform parent)
         {
             this.position = position;
-            Instantiate(ground.Prefab, position, Quaternion.identity, parent);
+            Instantiate(groundAsset.Prefab, position, Quaternion.identity, parent);
         }
 
         public Cell CloneCell()
         {
             Cell newCell = ScriptableObject.CreateInstance<Cell>();
-            newCell.ground = this.ground;
+            newCell.groundAsset = this.groundAsset;
             return newCell;
         }
 
         public void BecomeFree()
         {
             this.isFree = true;
-            this.item = null;
+            this.itemAsset = null;
         }
 
-        internal void SpawnItem(Item item)
+        internal void SpawnItem(ItemAsset itemAsset)
         {
-            this.item = item;
-            this.item.Spawn(this, this.Position);
+            this.itemAsset = itemAsset;
+            this.itemAsset.Spawn(this, this.Position);
             this.isFree = false;
         }
     }

@@ -1,12 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MiniIT.Test.Grounds
 {
-    [CreateAssetMenu(fileName = "Ground", menuName = "Game/Ground",order = 1)]
-    public class Ground : ScriptableObject, IGround
+    public class Ground : MonoBehaviour
     {
-        [SerializeField] private GameObject prefab = null;
+        [SerializeField] private ParticleSystem mergeEffect = null;
 
-        public GameObject Prefab => prefab;
+        public ParticleSystem MergeEffect => mergeEffect;
+
+        public void PlayMergeEffect()
+        {
+            this.MergeEffect.Play();
+        }
     }
 }

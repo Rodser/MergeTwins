@@ -15,7 +15,7 @@ namespace MiniIT.Test
 		[SerializeField] private Cell cell = null;
 
         [Header("Start configuration")]
-        [SerializeField] private Item startItem;
+        [SerializeField] private ItemAsset startItemAsset;
         [SerializeField] private int startCountItems;
         
         [Header("Time")]
@@ -101,7 +101,7 @@ namespace MiniIT.Test
             }
             
             int lucky = UnityEngine.Random.Range(0, cells.Count);
-            this.grid[cells[lucky].Number].SpawnItem(this.startItem);
+            this.grid[cells[lucky].Number].SpawnItem(this.startItemAsset);
         }
     }
 }

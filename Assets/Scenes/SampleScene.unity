@@ -157,7 +157,7 @@ MonoBehaviour:
   height: 3
   spaceBetweenCells: 1.1
   cell: {fileID: 11400000, guid: e2c8897ecd20dc34f925315f6344c798, type: 2}
-  startItem: {fileID: 11400000, guid: 73de0089b83ebc7499b556cee6c184fb, type: 2}
+  startItemAsset: {fileID: 11400000, guid: 73de0089b83ebc7499b556cee6c184fb, type: 2}
   startCountItems: 2
   timeBetweenSpawn: 3
 --- !u!114 &300858398
@@ -318,8 +318,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.34242615, g: 0.57834285, b: 0.764151, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -340,7 +340,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 23
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
