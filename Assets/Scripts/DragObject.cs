@@ -4,7 +4,7 @@ namespace MiniIT.Test
 {
     public class DragObject : MonoBehaviour
     {
-        [SerializeField] private Collider collider = null;
+        [SerializeField] private new Collider collider = null;
         [SerializeField] private Vector3 jumpHeight;
 
         private Vector3 startPosition;

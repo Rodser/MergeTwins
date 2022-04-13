@@ -6,7 +6,7 @@ namespace MiniIT.Test
     [CreateAssetMenu(fileName = "LevelManager", menuName = "Game/LevelManager", order = 3)]
     public class LevelManager : ScriptableObject
     {
-        [SerializeField] private ItemAsset[] items;
+        [SerializeField] private ItemAsset[] items = null;
 
         public ItemAsset GetItem(int level)
         {

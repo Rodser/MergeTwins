@@ -5,12 +5,12 @@ namespace MiniIT.Test.Grounds
     public class Ground : MonoBehaviour
     {
         [SerializeField] private ParticleSystem mergeEffect = null;
-
-        public ParticleSystem MergeEffect => mergeEffect;
-
+        [SerializeField] private AudioSource mergeSound = null;
+       
         public void PlayMergeEffect()
         {
-            this.MergeEffect.Play();
+            this.mergeSound.Play();
+            this.mergeEffect.Play();
         }
     }
 }

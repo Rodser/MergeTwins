@@ -15,8 +15,8 @@ namespace MiniIT.Test
 		[SerializeField] private Cell cell = null;
 
         [Header("Start configuration")]
-        [SerializeField] private ItemAsset startItemAsset;
-        [SerializeField] private int startCountItems;
+        [SerializeField] private ItemAsset startItemAsset = null;
+        [SerializeField] private int startCountItems = 1;
         
         [Header("Time")]
         [SerializeField] private float timeBetweenSpawn = 1f;
@@ -28,8 +28,8 @@ namespace MiniIT.Test
 
         public void CreateGrid()
         {
-            BuilderGrid();
-            StartCoroutine(SpawnItemsRoutine());
+            this.BuilderGrid();
+            StartCoroutine(this.SpawnItemsRoutine());
         }
 
         private IEnumerator SpawnItemsRoutine()
@@ -39,28 +39,28 @@ namespace MiniIT.Test
                 yield return null;
             }
             
-            SpawnItems(startCountItems);
-            StartCoroutine(SpawnItemReapitRoutine());
+            this.SpawnItems(this.startCountItems);
+            StartCoroutine(this.SpawnItemReapitRoutine());
         }
 
         private IEnumerator SpawnItemReapitRoutine()
         {
             while (true)
             {
-                yield return new WaitForSeconds(timeBetweenSpawn);
-                SpawnItems(1);
+                yield return new WaitForSeconds(this.timeBetweenSpawn);
+                this.SpawnItems(1);
             }
         }
 
         private void BuilderGrid()
         {
-            this.grid = new Cell[height * width];
+            this.grid = new Cell[this.height * this.width];
 
-            for (int z = 0, i = 0; z < height; z++)
+            for (int z = 0, i = 0; z < this.height; z++)
             {
-                for (int x = 0; x < width; x++)
+                for (int x = 0; x < this.width; x++)
                 {
-                    CreateCell(x, z, i++);
+                    this.CreateCell(x, z, i++);
                 }
             }
             
@@ -71,9 +71,9 @@ namespace MiniIT.Test
         {
             Vector3 positionCell = new Vector3
             {
-                x = x * spaceBetweenCells,
+                x = x * this.spaceBetweenCells,
                 y = 0f,
-                z = z * spaceBetweenCells
+                z = z * this.spaceBetweenCells
             };
 
             this.CurrentGrid[number] = this.cell.CloneCell();
@@ -91,7 +91,7 @@ namespace MiniIT.Test
                                    where cell.IsFree
                                    select cell);
                 
-                RandomSpawn(freeCells);
+                this.RandomSpawn(freeCells);
             }
         }
 

@@ -123,6 +123,19 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &311291337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7023259635341775319, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+  m_PrefabInstance: {fileID: 7023259633511785899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &311291340
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311291337}
+  m_Enabled: 1
 --- !u!1 &1593634016
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +281,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 544986135506776322, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2246112784292593864, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -278,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2246112784292593864, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 53.042778
+      value: 53.042786
       objectReference: {fileID: 0}
     - target: {fileID: 2246112784292593864, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -288,6 +305,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4558968263907225601, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7023259633635628228, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -335,6 +356,10 @@ PrefabInstance:
     - target: {fileID: 7023259634994024213, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023259635341775319, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+      propertyPath: m_Name
+      value: CameraUI
       objectReference: {fileID: 0}
     - target: {fileID: 7329995419332936273, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_IsActive

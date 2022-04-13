@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace MiniIT.Test.Items
 {
-    public class Item : MonoBehaviour, IItem
+    public class Item : MonoBehaviour
     {
-        [SerializeField] private Collider collider = null;
+        [SerializeField] private new Collider collider = null;
         [SerializeField] private Animator animator = null;
         
         [Header("Parameters of merge")]
@@ -15,7 +15,7 @@ namespace MiniIT.Test.Items
         private static readonly int isMerge = Animator.StringToHash("IsMerge");
         
         private ItemAsset parent = null;
-        private Cell parentCell;
+        private Cell parentCell = null;
         private float startTime = 0f;
         private float journeyLength = 0f;
         private Vector3 otherPosition;
@@ -40,7 +40,6 @@ namespace MiniIT.Test.Items
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("trigger!");
             Item otherItem = other.gameObject.GetComponent<Item>();
             
             if (otherItem == null || !otherItem.Collider.isTrigger)
@@ -60,7 +59,7 @@ namespace MiniIT.Test.Items
         {
             this.ShutOffColliders(otherItem);
             this.AnimateMerge(otherItem);
-            this.parentCell.GroundAsset.Prefab.PlayMergeEffect();
+            this.parentCell.Ground.PlayMergeEffect();
             
             ItemAsset newItemAsset = Game.LevelManager.GetItem(this.parent.Level);
             StartCoroutine(this.ChangeItemRoutine(newItemAsset, otherItem));
@@ -80,7 +79,7 @@ namespace MiniIT.Test.Items
         {
             otherItem.parentCell.BecomeFree();
             Destroy(otherItem.gameObject);
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
 
         private void AnimateMerge(Item otherItem)

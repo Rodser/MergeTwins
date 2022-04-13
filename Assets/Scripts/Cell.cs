@@ -11,19 +11,19 @@ namespace MiniIT.Test
         [SerializeField] private GroundAsset groundAsset = null;
 
         private ItemAsset itemAsset = null;
+        private Ground ground = null;
         private Vector3 position;
         private bool isFree = true;
 
         public bool IsFree => isFree;
         public int Number { get; set; }
-        public GroundAsset GroundAsset => groundAsset;
-        public ItemAsset ItemAsset => itemAsset;
         public Vector3 Position => position;
+        public Ground Ground => ground;
 
         public void Initialization(Vector3 position, Transform parent)
         {
             this.position = position;
-            Instantiate(groundAsset.Prefab, position, Quaternion.identity, parent);
+            this.ground = Instantiate(this.groundAsset.Prefab, position, Quaternion.identity, parent);
         }
 
         public Cell CloneCell()

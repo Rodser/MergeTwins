@@ -7,7 +7,7 @@ namespace MiniIT.Test
     {
         [SerializeField] private LevelManager levelManager = null;
         [SerializeField] private Grid grid = null;
-        [SerializeField] private UIManager sceneUI;
+        [SerializeField] private UIManager sceneUI = null;
 
         private void Awake()
         {
@@ -19,8 +19,8 @@ namespace MiniIT.Test
 
         private void ReloadUI()
         {
-            sceneUI.gameObject.SetActive(false);
-            sceneUI.gameObject.SetActive(true);
+            this.sceneUI.gameObject.SetActive(false);
+            this.sceneUI.gameObject.SetActive(true);
         }
     }
 }

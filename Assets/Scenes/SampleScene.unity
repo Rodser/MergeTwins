@@ -305,6 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -370,6 +371,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 83.47, y: -90, z: 0}
+--- !u!81 &963194229
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+--- !u!82 &1216596158 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6993533363163045785, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+  m_PrefabInstance: {fileID: 2064465178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2064465178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -537,5 +551,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8359046389458041939, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 1216596158}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}

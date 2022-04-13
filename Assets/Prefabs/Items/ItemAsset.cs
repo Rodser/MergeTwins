@@ -10,16 +10,12 @@ namespace MiniIT.Test.Items
         [SerializeField] private Item prefab = null;
 
         private Item currentItem = null;
-        private Cell parentCell = null;
         
         public int Level => level;
         public int Profit => profit;
-        public Cell ParentCell => parentCell;
-        public Item CurrentItem => currentItem;
 
         public void Spawn(Cell parentCell, Vector3 position)
         {
-            this.parentCell = parentCell;
             this.currentItem = Instantiate(this.prefab, position, Quaternion.identity);
             this.currentItem.SetParent(this, parentCell);
         }

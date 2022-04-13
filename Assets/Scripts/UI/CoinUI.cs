@@ -5,13 +5,13 @@ namespace MiniIT.Test.UI
 {
     public class CoinUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI textCoin;
+        [SerializeField] private TextMeshProUGUI textCoin = null;
 
         private int coin = 0;
         
         private void Start()
         {
-            textCoin.text = coin.ToString();
+            this.textCoin.text = this.coin.ToString();
         }
 
         private void OnEnable()
@@ -26,8 +26,8 @@ namespace MiniIT.Test.UI
 
         private void Profit(object sender, int profit)
         {
-            coin += profit;
-            textCoin.text = coin.ToString();
+            this.coin += profit;
+            this.textCoin.text = this.coin.ToString();
         }
     }
 }
