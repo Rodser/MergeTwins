@@ -6,8 +6,6 @@ namespace MiniIT.Test.UI
 {
     public class Menu : MonoBehaviour
     {
-        [SerializeField] private GameObject sceneUI;
-        [SerializeField] private Image panelMenu = null;
         [SerializeField] private Button settingButton = null;
         [SerializeField] private Button playButton = null;
         [SerializeField] private Button exitButton = null;
@@ -27,9 +25,7 @@ namespace MiniIT.Test.UI
         private void LoadScene()
         {
             Debug.Log("Load Scene");
-            DontDestroyOnLoad(sceneUI);
             SceneManager.LoadSceneAsync(Game.Level);
-            this.gameObject.SetActive(false);
         }
 
         private void Quit()

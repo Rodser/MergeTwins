@@ -1,20 +1,31 @@
-﻿namespace MiniIT.Test
+﻿using System;
+using MiniIT.Test.Items;
+
+namespace MiniIT.Test
 {
     public static class Game
     {
-        private static int level = 1;
+        public static event Action<object, int> OnProfitEvent;
         
-        public static LevelManager LevelManager { get; set; }
-        public static int Level => level;
+        private static int _level = 1;
+        private static LevelManager _levelManager;
+
+        public static LevelManager LevelManager => _levelManager;
+        public static int Level => _level;
         
         public static void SetLevelManager(LevelManager levelManager)
         {
-            LevelManager = levelManager;
+            _levelManager = levelManager;
         }
 
         public static void SetLevel(int newLevel)
         {
-            level = newLevel;
+            _level = newLevel;
+        }
+
+        public static void MakeProfit(Item sender, int profit)
+        {
+            OnProfitEvent?.Invoke(sender, profit);
         }
     }
 }

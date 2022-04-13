@@ -14,7 +14,8 @@ namespace MiniIT.Test.Items
 
         private static readonly int isMerge = Animator.StringToHash("IsMerge");
         
-        private Cell parentCell = null;
+        private ItemAsset parent = null;
+        private Cell parentCell;
         private float startTime = 0f;
         private float journeyLength = 0f;
         private Vector3 otherPosition;
@@ -31,9 +32,10 @@ namespace MiniIT.Test.Items
             }
         }
 
-        public void SetParent(Cell parent)
+        public void SetParent(ItemAsset parent, Cell parentCell)
         {
-            this.parentCell = parent;
+            this.parent = parent;
+            this.parentCell = parentCell;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -46,10 +48,11 @@ namespace MiniIT.Test.Items
                 return;
             }
             
-            if (otherItem.parentCell.ItemAsset.Level == this.parentCell.ItemAsset.Level)
+            if (otherItem.parent.Level == this.parent.Level)
             {
                 otherItem.GetComponent<DragObject>().DestroyDragObject();
                 this.Merge(otherItem);
+                Game.MakeProfit(this, parent.Profit);
             }
         }
 
@@ -59,7 +62,7 @@ namespace MiniIT.Test.Items
             this.AnimateMerge(otherItem);
             this.parentCell.GroundAsset.Prefab.PlayMergeEffect();
             
-            ItemAsset newItemAsset = Game.LevelManager.GetItem(this.parentCell.ItemAsset.Level);
+            ItemAsset newItemAsset = Game.LevelManager.GetItem(this.parent.Level);
             StartCoroutine(this.ChangeItemRoutine(newItemAsset, otherItem));
         }
 

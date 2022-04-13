@@ -24,6 +24,8 @@ namespace MiniIT.Test
         private Cell[] grid = null;
         private bool hasCompiled = false;
 
+        public Cell[] CurrentGrid => grid;
+
         public void CreateGrid()
         {
             BuilderGrid();
@@ -74,9 +76,9 @@ namespace MiniIT.Test
                 z = z * spaceBetweenCells
             };
 
-            this.grid[number] = this.cell.CloneCell();
-            this.grid[number].Number = number;
-            this.grid[number].Initialization(positionCell, this.transform);
+            this.CurrentGrid[number] = this.cell.CloneCell();
+            this.CurrentGrid[number].Number = number;
+            this.CurrentGrid[number].Initialization(positionCell, this.transform);
         }
 
         private void SpawnItems(int countItems)
@@ -85,7 +87,7 @@ namespace MiniIT.Test
 
             for (int i = 0; i < countItems; i++)
             {
-                freeCells.AddRange(from Cell cell in this.grid
+                freeCells.AddRange(from Cell cell in this.CurrentGrid
                                    where cell.IsFree
                                    select cell);
                 
@@ -101,7 +103,7 @@ namespace MiniIT.Test
             }
             
             int lucky = UnityEngine.Random.Range(0, cells.Count);
-            this.grid[cells[lucky].Number].SpawnItem(this.startItemAsset);
+            this.CurrentGrid[cells[lucky].Number].SpawnItem(this.startItemAsset);
         }
     }
 }
