@@ -16,6 +16,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7f1c80c76a234c4bbc291eb52832bbba1a000/d4/2c266b6d/Collider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.7.6/Runtime/VisualScripting.Core/Cloning/Cloning.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -69,7 +70,8 @@
       <workItem from="1649504550294" duration="20825000" />
       <workItem from="1649590538508" duration="8288000" />
       <workItem from="1649650355344" duration="4591000" />
-      <workItem from="1649823549767" duration="12635000" />
+      <workItem from="1649823549767" duration="15206000" />
+      <workItem from="1650726444963" duration="2626000" />
     </task>
     <servers />
   </component>

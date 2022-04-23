@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915d0522adfbe0248921753d09f54149, type: 3}
   m_Name: Cell
   m_EditorClassIdentifier: 
-  groundAsset: {fileID: 11400000, guid: 2d084de529a121b49affc5cc49c2fd20, type: 2}
+  groundAsset: {fileID: 11400000, guid: f8850dd59334e1d4b9e2a08430460a96, type: 2}
+  groundRotation: {x: 0, y: 32.63, z: 0}
