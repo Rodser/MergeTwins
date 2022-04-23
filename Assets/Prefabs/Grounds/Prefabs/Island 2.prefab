@@ -284,6 +284,70 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 776829664267617791}
     m_Modifications:
+    - target: {fileID: 2086306136907828145, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086306136907828145, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086306136907828145, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.8515239
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086306136907828145, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.8962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086306136907828145, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5538003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086306136907828145, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.57439923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.40472588
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443678798143852198, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5859344463506715160, guid: b35b256e434a6584f981b87925f7b2dc, type: 3}
       propertyPath: m_Name
       value: DustSmoke_B

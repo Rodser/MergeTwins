@@ -1,5 +1,4 @@
-﻿using System;
-using MiniIT.Test.Grounds;
+﻿using MiniIT.Test.Grounds;
 using MiniIT.Test.Items;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ namespace MiniIT.Test
     public class Cell : ScriptableObject
     {
         [SerializeField] private GroundAsset groundAsset = null;
-        [SerializeField] private Vector3 groundRotation;
         
         private ItemAsset itemAsset = null;
         private Ground ground = null;
@@ -23,9 +21,8 @@ namespace MiniIT.Test
 
         public void Initialization(Vector3 position, Transform parent)
         {
-            Quaternion rotate = Quaternion.Euler(groundRotation * Number);
             this.position = position;
-            this.ground = Instantiate(this.groundAsset.Prefab, position, rotate, parent);
+            this.ground = Instantiate(this.groundAsset.Prefab, position, Quaternion.identity, parent);
         }
 
         public Cell CloneCell()
