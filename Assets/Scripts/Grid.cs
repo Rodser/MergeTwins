@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,13 +24,27 @@ namespace MiniIT.Test
         
         private Cell[] grid = null;
         private bool hasCompiled = false;
-
+        private bool isFilled = false;
+        private float timeToDefeat = 0f;
+        
         public Cell[] CurrentGrid => grid;
 
         public void CreateGrid()
         {
             this.BuilderGrid();
             StartCoroutine(this.SpawnItemsRoutine());
+        }
+
+        private void Update()
+        {
+            if (this.isFilled && Game.IsPlaying)
+            {
+                timeToDefeat += Time.deltaTime;
+                if (timeToDefeat >= Game.LevelManager.TimeToDefeat)
+                {
+                    Game.GameOver();
+                }
+            }
         }
 
         private IEnumerator SpawnItemsRoutine()
@@ -40,10 +55,10 @@ namespace MiniIT.Test
             }
             
             this.SpawnItems(this.startCountItems);
-            StartCoroutine(this.SpawnItemReapitRoutine());
+            StartCoroutine(this.SpawnItemRepeatRoutine());
         }
 
-        private IEnumerator SpawnItemReapitRoutine()
+        private IEnumerator SpawnItemRepeatRoutine()
         {
             while (true)
             {
@@ -99,9 +114,13 @@ namespace MiniIT.Test
         {
             if (cells.Count == 0)
             {
+                this.isFilled = true;
                 return;
             }
-            
+
+            this.isFilled = false;
+            this.timeToDefeat = 0f;
+
             int lucky = UnityEngine.Random.Range(0, cells.Count);
             this.CurrentGrid[cells[lucky].Number].SpawnItem(this.startItemAsset);
         }
