@@ -11,7 +11,7 @@ namespace MiniIT.Test
         
         private static int _level = 1;
         private static LevelManager _levelManager;
-        private static bool isPlaying = true;
+        private static bool isPlaying = false;
 
         public static LevelManager LevelManager => _levelManager;
         public static int Level => _level;
@@ -27,6 +27,11 @@ namespace MiniIT.Test
             _level = newLevel;
         }
 
+        public static void StartGame()
+        {
+            isPlaying = true;
+        }
+
         public static void MakeProfit(Item sender, int profit)
         {
             OnProfitEvent?.Invoke(sender, profit);
@@ -37,7 +42,7 @@ namespace MiniIT.Test
             OnGameOverEvent?.Invoke();
             isPlaying = false;
         }
-        
+
         public static void OnClickButton(object sender)
         {
             OnClickButtonEvent?.Invoke(sender);

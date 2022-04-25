@@ -21,6 +21,7 @@ namespace MiniIT.Test.UI
             Debug.Log("Load Scene");
             Game.OnClickButton(this);
             Time.timeScale = 1;
+            Game.StartGame();
             SceneManager.LoadSceneAsync(Game.Level);
         }
 

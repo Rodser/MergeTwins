@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74118dc6cb354599be7346d0d389d775, type: 3}
   m_Name: LevelManager
   m_EditorClassIdentifier: 
+  timeToDefeat: 4
   items:
   - {fileID: 11400000, guid: 73de0089b83ebc7499b556cee6c184fb, type: 2}
   - {fileID: 11400000, guid: b3f0ec14975e2d64ba6b25c3cd7b927e, type: 2}

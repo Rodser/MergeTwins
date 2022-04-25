@@ -34,6 +34,7 @@ namespace MiniIT.Test.UI
         {
             Debug.Log("Load Scene");
             Game.OnClickButton(this);
+            Game.StartGame();
             SceneManager.LoadSceneAsync(Game.Level);
         }
 
