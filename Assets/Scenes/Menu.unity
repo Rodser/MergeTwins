@@ -250,7 +250,7 @@ PrefabInstance:
     - target: {fileID: 7023259633892343572, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 81cd7f7bec3a07b4d95e92cc89b4fbfe, type: 3}
     - target: {fileID: 7023259633892343572, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -274,6 +274,18 @@ PrefabInstance:
     - target: {fileID: 7023259633892343573, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023259634313156388, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023259634313156388, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023259634405598269, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 13.000004
       objectReference: {fileID: 0}
     - target: {fileID: 7023259634568958798, guid: 1af4b6e33a8c0da4f95c2e7d8583a0c8, type: 3}
       propertyPath: m_AnchorMax.y
