@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MiniIT.Test.Items
+namespace Rodser.MergeTwins.Items
 {
     public class ItemSpinning : MonoBehaviour
     {

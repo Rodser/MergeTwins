@@ -1,8 +1,8 @@
-﻿using MiniIT.Test.Grounds;
-using MiniIT.Test.Items;
+﻿using Rodser.MergeTwins.Grounds;
+using Rodser.MergeTwins.Items;
 using UnityEngine;
 
-namespace MiniIT.Test
+namespace Rodser.MergeTwins
 {
     [CreateAssetMenu(fileName = "Cell", menuName = "Game/Cell", order = 0)]
     public class Cell : ScriptableObject

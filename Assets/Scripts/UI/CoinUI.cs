@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace MiniIT.Test.UI
+namespace Rodser.MergeTwins.UI
 {
     public class CoinUI : MonoBehaviour
     {

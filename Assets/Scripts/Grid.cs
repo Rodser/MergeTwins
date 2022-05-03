@@ -3,34 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using MiniIT.Test.Items;
+using Rodser.MergeTwins.Items;
 
-namespace MiniIT.Test
+namespace Rodser.MergeTwins
 {
 	public class Grid : MonoBehaviour
 	{
-        [Header("Configuration of Grid")]
-		[SerializeField] private int width = 3;
-		[SerializeField] private int height = 3;
         [SerializeField] private float spaceBetweenCells = 2f;
-		[SerializeField] private Cell cell = null;
+        
+        private int width = 1;
+        private int height = 1;
+        private Cell cell = null;
+        private ItemAsset startItemAsset = null;
+        private int startCountItems = 1;        
+        private float timeBetweenSpawn = 1f;
+        private float timeToDefeat = 1f;
 
-        [Header("Start configuration")]
-        [SerializeField] private ItemAsset startItemAsset = null;
-        [SerializeField] private int startCountItems = 1;
-        
-        [Header("Time")]
-        [SerializeField] private float timeBetweenSpawn = 1f;
-        
+        private float currentTimeToDefeat = 0f;
         private Cell[] grid = null;
         private bool hasCompiled = false;
         private bool isFilled = false;
-        private float timeToDefeat = 0f;
         
         public Cell[] CurrentGrid => grid;
 
-        public void CreateGrid()
+        public void CreateGrid(int width, int height, Cell cell, ItemAsset startItem, int startCount, float timeSpawn, float timeToDefeat)
         {
+            this.width = width;
+            this.height = height;
+            this.cell = cell;
+            this.startItemAsset = startItem;
+            this.startCountItems = startCount;
+            this.timeBetweenSpawn = timeSpawn;
+            this.timeToDefeat = timeToDefeat;
+
             this.BuilderGrid();
             StartCoroutine(this.SpawnItemsRoutine());
         }
@@ -39,8 +44,8 @@ namespace MiniIT.Test
         {
             if (this.isFilled && Game.IsPlaying)
             {
-                timeToDefeat += Time.deltaTime;
-                if (timeToDefeat >= Game.LevelManager.TimeToDefeat)
+                currentTimeToDefeat += Time.deltaTime;
+                if (currentTimeToDefeat >= this.timeToDefeat)
                 {
                     Game.GameOver();
                 }
@@ -119,7 +124,7 @@ namespace MiniIT.Test
             }
 
             this.isFilled = false;
-            this.timeToDefeat = 0f;
+            this.currentTimeToDefeat = 0f;
 
             int lucky = UnityEngine.Random.Range(0, cells.Count);
             this.CurrentGrid[cells[lucky].Number].SpawnItem(this.startItemAsset);

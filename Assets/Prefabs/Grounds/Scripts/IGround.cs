@@ -1,4 +1,4 @@
-﻿namespace MiniIT.Test.Grounds
+﻿namespace Rodser.MergeTwins.Grounds
 {
     public interface IGround
     {

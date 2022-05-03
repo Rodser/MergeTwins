@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace MiniIT.Test.UI
+namespace Rodser.MergeTwins.UI
 {
     public class UIManager : MonoBehaviour
     {
@@ -35,6 +35,8 @@ namespace MiniIT.Test.UI
         {
             OnClickSound(this);
             this.menu.gameObject.SetActive(true);
+            this.menu.SetButtonMenu(buttonMenu);
+            this.buttonMenu.gameObject.SetActive(false);
             Time.timeScale = 0;
         }
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MiniIT.Test.Grounds
+namespace Rodser.MergeTwins.Grounds
 {
     public class Ground : MonoBehaviour
     {

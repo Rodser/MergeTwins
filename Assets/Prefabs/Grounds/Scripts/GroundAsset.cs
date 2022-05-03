@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MiniIT.Test.Grounds
+namespace Rodser.MergeTwins.Grounds
 {
     [CreateAssetMenu(fileName = "Ground", menuName = "Game/Ground",order = 1)]
     public class GroundAsset : ScriptableObject

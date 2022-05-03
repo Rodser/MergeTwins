@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace MiniIT.Test.UI
+namespace Rodser.MergeTwins.UI
 {
     public class GameOverUI : MonoBehaviour
     {
@@ -20,7 +20,6 @@ namespace MiniIT.Test.UI
         {
             Debug.Log("Load Scene");
             Game.OnClickButton(this);
-            Time.timeScale = 1;
             Game.StartGame();
             SceneManager.LoadSceneAsync(Game.Level);
         }

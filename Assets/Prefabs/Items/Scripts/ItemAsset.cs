@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MiniIT.Test.Items
+namespace Rodser.MergeTwins.Items
 {
     [CreateAssetMenu(fileName ="Item", menuName ="Game/Item", order = 2)]
     public class ItemAsset : ScriptableObject

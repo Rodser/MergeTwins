@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MiniIT.Test
+namespace Rodser.MergeTwins
 {
     public class DragObject : MonoBehaviour
     {

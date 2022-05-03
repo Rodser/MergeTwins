@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace MiniIT.Test.Items
+namespace Rodser.MergeTwins.Items
 {
     public class Item : MonoBehaviour
     {
@@ -60,8 +60,8 @@ namespace MiniIT.Test.Items
             this.ShutOffColliders(otherItem);
             this.AnimateMerge(otherItem);
             this.parentCell.Ground.PlayMergeEffect();
-            
-            ItemAsset newItemAsset = Game.LevelManager.GetItem(this.parent.Level);
+
+            ItemAsset newItemAsset = Game.GameManager.GetItem(this.parent.Level);
             StartCoroutine(this.ChangeItemRoutine(newItemAsset, otherItem));
         }
 
