@@ -9,18 +9,16 @@ namespace Rodser.MergeTwins
         public static event Action<object> OnClickButtonEvent;
         public static event Action OnGameOverEvent;
         
-        private static int _level = 1;
         private static bool _isPlaying = false;
         private static GameManager _gameManager = null;
 
-        public static bool IsPlaying => _isPlaying;
         public static GameManager GameManager { get => _gameManager; set => _gameManager = value; }
-        public static int Level { get => _level; set => _level = value; }
+        public static bool IsPlaying { get => _isPlaying; set => _isPlaying = value; }
 
         public static void StartGame()
         {
             _isPlaying = true;
-            _gameManager.StartLevel(_level);
+            _gameManager.StartLevel();
         }
 
         public static void MakeProfit(Item sender, int profit)

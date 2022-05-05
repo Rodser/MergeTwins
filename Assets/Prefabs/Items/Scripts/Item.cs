@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Rodser.MergeTwins.Grounds;
+using System.Collections;
 using UnityEngine;
 
 namespace Rodser.MergeTwins.Items
@@ -15,7 +16,7 @@ namespace Rodser.MergeTwins.Items
         private static readonly int isMerge = Animator.StringToHash("IsMerge");
         
         private ItemAsset parent = null;
-        private Cell parentCell = null;
+        private Ground parentGround = null;
         private float startTime = 0f;
         private float journeyLength = 0f;
         private Vector3 otherPosition;
@@ -32,10 +33,10 @@ namespace Rodser.MergeTwins.Items
             }
         }
 
-        public void SetParent(ItemAsset parent, Cell parentCell)
+        public void SetParent(ItemAsset parent, Ground parentGround)
         {
             this.parent = parent;
-            this.parentCell = parentCell;
+            this.parentGround = parentGround;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -47,7 +48,7 @@ namespace Rodser.MergeTwins.Items
                 return;
             }
             
-            if (otherItem.parent.Level == this.parent.Level)
+            if (otherItem.parent.LevelItem == this.parent.LevelItem)
             {
                 otherItem.GetComponent<DragObject>().DestroyDragObject();
                 this.Merge(otherItem);
@@ -59,9 +60,9 @@ namespace Rodser.MergeTwins.Items
         {
             this.ShutOffColliders(otherItem);
             this.AnimateMerge(otherItem);
-            this.parentCell.Ground.PlayMergeEffect();
+            this.parentGround.PlayMergeEffect();
 
-            ItemAsset newItemAsset = Game.GameManager.GetItem(this.parent.Level);
+            ItemAsset newItemAsset = Game.GameManager.GetItem(this.parent.LevelItem);
             StartCoroutine(this.ChangeItemRoutine(newItemAsset, otherItem));
         }
 
@@ -70,14 +71,14 @@ namespace Rodser.MergeTwins.Items
             yield return new WaitForSeconds(this.timeOfMerge);
             if (newItemAsset != null)
             {
-                this.parentCell.SpawnItem(newItemAsset);
+                this.parentGround.SpawnItem(newItemAsset);
             }
             this.DestroyItems(otherItem);
         }
 
         private void DestroyItems(Item otherItem)
         {
-            otherItem.parentCell.BecomeFree();
+            otherItem.parentGround.BecomeFree();
             Destroy(otherItem.gameObject);
             Destroy(this.gameObject);
         }
@@ -94,7 +95,7 @@ namespace Rodser.MergeTwins.Items
             this.HasMerged = true;
             this.startTime = Time.time;
             this.journeyLength = Vector3.Distance(otherItem.transform.position, this.transform.position);
-            this.otherPosition = otherItem.parentCell.Position;
+            this.otherPosition = otherItem.parentGround.Position;
             
         }
 

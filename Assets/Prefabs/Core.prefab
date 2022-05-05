@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a565f1abadb7b504a93a0b7e126e3408, type: 2}
   grid: {fileID: 1657773712}
   sceneUI: {fileID: 589761100543140952}
+  timeToWin: 1
 --- !u!114 &1657773712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6938480731767915731}
   - component: {fileID: 6938480731767915732}
+  - component: {fileID: 5589412895775041004}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -148,6 +150,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!81 &5589412895775041004
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938480731767915734}
+  m_Enabled: 1
 --- !u!1 &6938480732029919203
 GameObject:
   m_ObjectHideFlags: 0

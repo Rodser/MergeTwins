@@ -1,8 +1,10 @@
 using Rodser.MergeTwins.Items;
 using Rodser.MergeTwins.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Rodser.MergeTwins
 {
@@ -11,22 +13,50 @@ namespace Rodser.MergeTwins
         [SerializeField] private LevelManager[] levels;
         [SerializeField] private Grid grid = null;
         [SerializeField] private UIManager sceneUI = null;
+        [SerializeField] private float timeToWin = 0.5f;
+
+        public UIManager SceneUI => sceneUI;
+
+        private LevelManager currentLevel = null;
+        private int currentLevelIndex = 0;
+        private int currentLevelItem = 0;
+        private int indexScene = 1;
 
         private void Awake()
         {
             Game.GameManager = this;
+            currentLevel = levels[currentLevelIndex];
+            DontDestroyOnLoad(this);
         }
 
-        public void StartLevel(int level)
+        public void StartLevel()
         {
-            LevelManager lvl = levels[level];
-            this.grid.CreateGrid(lvl.Width, lvl.Height, lvl.Cell, lvl.GetItem(Game.Level)
-                                , lvl.StartCountItems, lvl.TimeBetweenSpawn, lvl.TimeToDefeat);
+            SceneManager.LoadSceneAsync(indexScene);
+            Time.timeScale = 1;
+            this.grid.CreateGrid(currentLevel.Width, currentLevel.Height, currentLevel.Cell, GetItem(currentLevelItem)
+                                , currentLevel.StartCountItems, currentLevel.TimeBetweenSpawn, currentLevel.TimeToDefeat);
+
         }
 
-        public ItemAsset GetItem(int level)
+        internal void RaisingTheLevel()
         {
-            return levels[level].GetItem(Game.Level);
+            currentLevel = levels[++currentLevelIndex];
+
+            StartCoroutine(RaisingTheLevelRoutine());
+        }
+
+        private IEnumerator RaisingTheLevelRoutine()
+        {
+            yield return new WaitForSeconds(timeToWin);
+
+            Game.IsPlaying = false;
+            Debug.Log("Win!!");
+            Game.StartGame();
+        }
+
+        public ItemAsset GetItem(int levelItem)
+        {
+            return currentLevel.GetItem(levelItem);
         }
     }
 }

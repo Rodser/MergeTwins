@@ -17,14 +17,11 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private AudioSource music = null;
         [SerializeField] private Slider soundSlider = null;
         [SerializeField] private Slider musicSlider = null;
-
-
-        private Button buttonMenu = null;
-
+                
         private void Start()
         {
             this.playButton.onClick.AddListener(LoadScene);
-            this.resetButton.onClick.AddListener(Reset);
+            this.resetButton.onClick.AddListener(Back);
             this.exitButton.onClick.AddListener(Quit);
 
             this.soundSlider.onValueChanged.AddListener(OnValueChangedSound);
@@ -43,9 +40,10 @@ namespace Rodser.MergeTwins.UI
             music.volume = musicSlider.value;
         }
 
-        public void SetButtonMenu(Button button)
+        public void SetButtonMenu()
         {
-            this.buttonMenu = button;
+            this.playButton.gameObject.SetActive(false);
+            this.resetButton.gameObject.SetActive(true);
         }
 
         private void LoadScene()
@@ -53,13 +51,13 @@ namespace Rodser.MergeTwins.UI
             Debug.Log("Load Scene");
             Game.OnClickButton(this);
             Game.StartGame();
-            SceneManager.LoadSceneAsync(Game.Level, LoadSceneMode.Additive);
+            Game.GameManager.SceneUI.SetStartConfig();
         }
 
-        private void Reset()
+        private void Back()
         {
             Time.timeScale = 1;
-            this.buttonMenu.gameObject.SetActive(true);
+            Game.GameManager.SceneUI.SetStartConfig();
             this.gameObject.SetActive(false);
             Game.OnClickButton(this);
         }

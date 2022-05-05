@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 915d0522adfbe0248921753d09f54149, type: 3}
-  m_Name: Cell
+  m_Name: Cell 1
   m_EditorClassIdentifier: 
   groundAsset: {fileID: 11400000, guid: f8850dd59334e1d4b9e2a08430460a96, type: 2}
-  groundRotation: {x: 0, y: 32.63, z: 0}
+  prefab: {fileID: -3759971900153831005, guid: 4506471ce50550648a6367731bdd9b82, type: 3}

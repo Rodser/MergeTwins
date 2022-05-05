@@ -11,8 +11,7 @@ namespace Rodser.MergeTwins
         [Header("Configuration of Grid")]
         [SerializeField] private int width = 3;
         [SerializeField] private int height = 3;
-        // [SerializeField] private float spaceBetweenCells = 2f;
-        [SerializeField] private Cell cell = null;
+        [SerializeField] private CellAsset cell = null;
 
         [Header("Start configuration")]
         [SerializeField] private int startCountItems = 1;
@@ -21,14 +20,26 @@ namespace Rodser.MergeTwins
 
         public int Width => width;
         public int Height => height;
-        public Cell Cell => cell;
+        public CellAsset Cell => cell;
         public int StartCountItems => startCountItems;
         public float TimeBetweenSpawn => timeBetweenSpawn;
         public float TimeToDefeat => timeToDefeat;
 
-        public ItemAsset GetItem(int level)
+        public ItemAsset GetItem(int levelItem)
         {
-            return level >= this.items.Length ? null : this.items[level];
+            if (levelItem >= this.items.Length)
+            {
+                return null;
+            }
+            else if (levelItem == this.items.Length - 1)
+            {
+                Game.GameManager.RaisingTheLevel();
+                return this.items[levelItem];
+            }
+            else
+            {
+                return this.items[levelItem];
+            }
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private Menu menu = null;
         [SerializeField] private CoinUI coinUI = null;
         [SerializeField] private GameOverUI gameOverUI = null;
-        [SerializeField] private Button buttonMenu = null;
+        [SerializeField] private ButtonUI buttonMenu = null;
+
         [SerializeField] private AudioSource clickSound = null;
         
         public Menu Menu => menu;
@@ -16,7 +17,7 @@ namespace Rodser.MergeTwins.UI
 
         private void Start()
         {
-            this.buttonMenu.onClick.AddListener(GetMenu);
+            this.buttonMenu.Button.onClick.AddListener(GetMenu);
         }
 
         private void OnEnable()
@@ -31,11 +32,19 @@ namespace Rodser.MergeTwins.UI
             Game.OnGameOverEvent -= GameOver;
         }
 
+        public void SetStartConfig()
+        {
+            this.menu.gameObject.SetActive(false);
+            this.coinUI.gameObject.SetActive(true);
+            this.gameOverUI.gameObject.SetActive(false);
+            this.buttonMenu.gameObject.SetActive(true);
+        }
+
         private void GetMenu()
         {
             OnClickSound(this);
             this.menu.gameObject.SetActive(true);
-            this.menu.SetButtonMenu(buttonMenu);
+            this.menu.SetButtonMenu();
             this.buttonMenu.gameObject.SetActive(false);
             Time.timeScale = 0;
         }

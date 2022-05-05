@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Rodser.MergeTwins.UI
@@ -9,7 +8,7 @@ namespace Rodser.MergeTwins.UI
     {
         [SerializeField] private Button resetButton = null;
         [SerializeField] private Button exitButton = null;
-
+        
         private void Start()
         {
             this.resetButton.onClick.AddListener(Reset);
@@ -20,8 +19,9 @@ namespace Rodser.MergeTwins.UI
         {
             Debug.Log("Load Scene");
             Game.OnClickButton(this);
+            //Game.GameManager.LevelUp(1);
+            Game.GameManager.SceneUI.SetStartConfig();
             Game.StartGame();
-            SceneManager.LoadSceneAsync(Game.Level);
         }
 
         private void Quit()

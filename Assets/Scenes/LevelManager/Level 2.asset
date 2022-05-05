@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 21d2b1476ad1e7544b224bed62c3c6b1, type: 2}
   width: 3
   height: 3
-  cell: {fileID: 0}
+  cell: {fileID: 11400000, guid: 1e36a551a4391f642a4201c4c5d439f9, type: 2}
   startCountItems: 1
   timeBetweenSpawn: 1
   timeToDefeat: 5

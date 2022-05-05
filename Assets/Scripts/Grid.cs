@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Rodser.MergeTwins.Items;
+using Rodser.MergeTwins.Grounds;
 
 namespace Rodser.MergeTwins
 {
@@ -13,31 +13,35 @@ namespace Rodser.MergeTwins
         
         private int width = 1;
         private int height = 1;
-        private Cell cell = null;
+        private CellAsset cellAsset = null;
         private ItemAsset startItemAsset = null;
         private int startCountItems = 1;        
         private float timeBetweenSpawn = 1f;
         private float timeToDefeat = 1f;
 
         private float currentTimeToDefeat = 0f;
-        private Cell[] grid = null;
+        private Ground[] grid = null;
         private bool hasCompiled = false;
         private bool isFilled = false;
-        
-        public Cell[] CurrentGrid => grid;
 
-        public void CreateGrid(int width, int height, Cell cell, ItemAsset startItem, int startCount, float timeSpawn, float timeToDefeat)
+        public void CreateGrid(int width, int height, CellAsset cell, ItemAsset startItem, int startCount, float timeSpawn, float timeToDefeat)
         {
+            if(grid != null)
+            {
+                Remove();
+            }
+            this.hasCompiled = false;
+
             this.width = width;
             this.height = height;
-            this.cell = cell;
+            this.cellAsset = cell;
             this.startItemAsset = startItem;
             this.startCountItems = startCount;
             this.timeBetweenSpawn = timeSpawn;
             this.timeToDefeat = timeToDefeat;
 
-            this.BuilderGrid();
-            StartCoroutine(this.SpawnItemsRoutine());
+            StartCoroutine(BuilderGridRoutine());
+            StartCoroutine(SpawnItemsRoutine());
         }
 
         private void Update()
@@ -47,6 +51,7 @@ namespace Rodser.MergeTwins
                 currentTimeToDefeat += Time.deltaTime;
                 if (currentTimeToDefeat >= this.timeToDefeat)
                 {
+                    hasCompiled = false;
                     Game.GameOver();
                 }
             }
@@ -59,28 +64,30 @@ namespace Rodser.MergeTwins
                 yield return null;
             }
             
-            this.SpawnItems(this.startCountItems);
-            StartCoroutine(this.SpawnItemRepeatRoutine());
+            SpawnItems(this.startCountItems);
+            StartCoroutine(SpawnItemRepeatRoutine());
         }
 
         private IEnumerator SpawnItemRepeatRoutine()
         {
-            while (true)
+            while (hasCompiled)
             {
                 yield return new WaitForSeconds(this.timeBetweenSpawn);
-                this.SpawnItems(1);
+                SpawnItems(1);
             }
         }
 
-        private void BuilderGrid()
+        private IEnumerator BuilderGridRoutine()
         {
-            this.grid = new Cell[this.height * this.width];
+            this.grid = new Ground[this.height * this.width];
 
-            for (int z = 0, i = 0; z < this.height; z++)
+            int n = 0;
+            for (int z = 0; z < this.height; z++)
             {
                 for (int x = 0; x < this.width; x++)
                 {
-                    this.CreateCell(x, z, i++);
+                    CreateCell(x, z, n++);
+                    yield return new WaitForSeconds(0.3f);
                 }
             }
             
@@ -96,28 +103,28 @@ namespace Rodser.MergeTwins
                 z = z * this.spaceBetweenCells
             };
 
-            this.CurrentGrid[number] = this.cell.CloneCell();
-            this.CurrentGrid[number].Number = number;
-            this.CurrentGrid[number].Initialization(positionCell, this.transform);
+            cellAsset.Initialization(positionCell, this.transform, number);
+            this.grid[number] = cellAsset.CurrentGround;
         }
 
         private void SpawnItems(int countItems)
         {
-            List<Cell> freeCells = new();
+            List<Ground> freeCells = new List<Ground>();
 
             for (int i = 0; i < countItems; i++)
             {
-                freeCells.AddRange(from Cell cell in this.CurrentGrid
-                                   where cell.IsFree
-                                   select cell);
+                freeCells.AddRange(from Ground ground in this.grid
+                                   where ground != null
+                                   where ground.IsFree
+                                   select ground);
                 
-                this.RandomSpawn(freeCells);
+                RandomSpawn(freeCells);
             }
         }
 
-        private void RandomSpawn(List<Cell> cells)
+        private void RandomSpawn(List<Ground> grounds)
         {
-            if (cells.Count == 0)
+            if (grounds.Count == 0)
             {
                 this.isFilled = true;
                 return;
@@ -126,8 +133,18 @@ namespace Rodser.MergeTwins
             this.isFilled = false;
             this.currentTimeToDefeat = 0f;
 
-            int lucky = UnityEngine.Random.Range(0, cells.Count);
-            this.CurrentGrid[cells[lucky].Number].SpawnItem(this.startItemAsset);
+            int lucky = UnityEngine.Random.Range(0, grounds.Count);
+            this.grid[grounds[lucky].Number].SpawnItem(this.startItemAsset);
+        }
+
+        private void Remove()
+        {
+            for (int i = 0; i < grid.Length; i++)
+            {
+                grid[i].Remove();
+            }
+            grid = null;
+            this.isFilled = false;
         }
     }
 }
