@@ -7,6 +7,8 @@ namespace Rodser.MergeTwins
     {
         public static event Action<object, int> OnProfitEvent;
         public static event Action<object> OnClickButtonEvent;
+        public static event Action<object> OnVictoryEvent;
+        public static event Action<object> OnRiasingLevelEvent;
         public static event Action OnGameOverEvent;
         
         private static bool _isPlaying = false;
@@ -35,6 +37,17 @@ namespace Rodser.MergeTwins
         public static void OnClickButton(object sender)
         {
             OnClickButtonEvent?.Invoke(sender);
+        }
+
+        internal static void Victory(object sender)
+        {
+            OnVictoryEvent?.Invoke(sender);
+        }
+
+        internal static void RiasingLevel(object sender)
+        {
+            StartGame();
+            OnRiasingLevelEvent?.Invoke(sender);
         }
     }
 }

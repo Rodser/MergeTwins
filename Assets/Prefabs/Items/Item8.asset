@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53a381d8edbae40a5955fd8595b551, type: 3}
   m_Name: Item8
   m_EditorClassIdentifier: 
-  level: 8
+  levelItem: 8
   profit: 80
   prefab: {fileID: 8559664174468222783, guid: d8e161ec8a4d5b6439510335a09a2f3c, type: 3}

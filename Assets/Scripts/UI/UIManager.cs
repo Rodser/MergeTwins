@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Rodser.MergeTwins.UI
@@ -38,6 +39,11 @@ namespace Rodser.MergeTwins.UI
             this.coinUI.gameObject.SetActive(true);
             this.gameOverUI.gameObject.SetActive(false);
             this.buttonMenu.gameObject.SetActive(true);
+        }
+
+        internal void Victory()
+        {
+            throw new NotImplementedException();
         }
 
         private void GetMenu()

@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1657773711, guid: 1237523377e14d443bea7d7ab7a98aaf, type: 3}
+      propertyPath: levels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1657773712, guid: 1237523377e14d443bea7d7ab7a98aaf, type: 3}
       propertyPath: grid.Array.size
       value: 0

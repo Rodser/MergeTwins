@@ -40,18 +40,34 @@ namespace Rodser.MergeTwins
 
         internal void RaisingTheLevel()
         {
-            currentLevel = levels[++currentLevelIndex];
-
-            StartCoroutine(RaisingTheLevelRoutine());
+            if (currentLevelIndex == levels.Length - 1)
+            {
+                StartCoroutine(RaisingTheLevelRoutine(false));
+                Debug.Log("last Level");
+            }
+            else
+            {
+                currentLevel = levels[++currentLevelIndex];
+                Debug.Log($"currentLevelIndex : {currentLevelIndex}");
+                StartCoroutine(RaisingTheLevelRoutine(true));
+            }
         }
 
-        private IEnumerator RaisingTheLevelRoutine()
+        private IEnumerator RaisingTheLevelRoutine(bool levelUp)
         {
             yield return new WaitForSeconds(timeToWin);
 
             Game.IsPlaying = false;
-            Debug.Log("Win!!");
-            Game.StartGame();
+            if (levelUp)
+            {
+                Debug.Log("Win!!");
+                Game.RiasingLevel(this);
+            }
+            else
+            {
+                Debug.Log("Victory!");
+                Game.Victory(this);
+            }
         }
 
         public ItemAsset GetItem(int levelItem)
