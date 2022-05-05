@@ -38,6 +38,11 @@ namespace Rodser.MergeTwins
 
         }
 
+        public ItemAsset GetItem(int levelItem)
+        {
+            return currentLevel.GetItem(levelItem);
+        }
+
         internal void RaisingTheLevel()
         {
             if (currentLevelIndex == levels.Length - 1)
@@ -47,10 +52,14 @@ namespace Rodser.MergeTwins
             }
             else
             {
-                currentLevel = levels[++currentLevelIndex];
                 Debug.Log($"currentLevelIndex : {currentLevelIndex}");
                 StartCoroutine(RaisingTheLevelRoutine(true));
             }
+        }
+
+        internal void RaisingCurrentLevel()
+        {
+            currentLevel = levels[++currentLevelIndex];
         }
 
         private IEnumerator RaisingTheLevelRoutine(bool levelUp)
@@ -68,11 +77,6 @@ namespace Rodser.MergeTwins
                 Debug.Log("Victory!");
                 Game.Victory(this);
             }
-        }
-
-        public ItemAsset GetItem(int levelItem)
-        {
-            return currentLevel.GetItem(levelItem);
         }
     }
 }

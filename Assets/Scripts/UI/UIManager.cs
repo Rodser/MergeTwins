@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Rodser.MergeTwins.UI
 {
@@ -10,6 +8,8 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private CoinUI coinUI = null;
         [SerializeField] private GameOverUI gameOverUI = null;
         [SerializeField] private ButtonUI buttonMenu = null;
+        [SerializeField] private NextUI nextUI = null;
+        [SerializeField] private VictoryUI victoryUI = null;
 
         [SerializeField] private AudioSource clickSound = null;
         
@@ -25,12 +25,16 @@ namespace Rodser.MergeTwins.UI
         {
             Game.OnClickButtonEvent += OnClickSound;
             Game.OnGameOverEvent += GameOver;
+            Game.OnRiasingLevelEvent += NextLevel;
+            Game.OnVictoryEvent += Victory;
         }
 
         private void OnDisable()
         {
             Game.OnClickButtonEvent -= OnClickSound;
             Game.OnGameOverEvent -= GameOver;
+            Game.OnRiasingLevelEvent -= NextLevel;
+            Game.OnVictoryEvent -= Victory;
         }
 
         public void SetStartConfig()
@@ -38,12 +42,23 @@ namespace Rodser.MergeTwins.UI
             this.menu.gameObject.SetActive(false);
             this.coinUI.gameObject.SetActive(true);
             this.gameOverUI.gameObject.SetActive(false);
+            this.nextUI.gameObject.SetActive(false);
+            this.victoryUI.gameObject.SetActive(false);
             this.buttonMenu.gameObject.SetActive(true);
         }
 
-        internal void Victory()
+        private void NextLevel(object sender)
         {
-            throw new NotImplementedException();
+            this.nextUI.gameObject.SetActive(true);
+            this.buttonMenu.gameObject.SetActive(false);
+            Time.timeScale = 0;
+        }
+
+        internal void Victory(object sender)
+        {
+            this.victoryUI.gameObject.SetActive(true);
+            this.buttonMenu.gameObject.SetActive(false);
+            Time.timeScale = 0;
         }
 
         private void GetMenu()

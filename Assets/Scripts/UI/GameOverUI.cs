@@ -11,11 +11,11 @@ namespace Rodser.MergeTwins.UI
         
         private void Start()
         {
-            this.resetButton.onClick.AddListener(Reset);
+            this.resetButton.onClick.AddListener(ReplayLevel);
             this.exitButton.onClick.AddListener(Quit);
         }
 
-        private void Reset()
+        private void ReplayLevel()
         {
             Debug.Log("Load Scene");
             Game.OnClickButton(this);

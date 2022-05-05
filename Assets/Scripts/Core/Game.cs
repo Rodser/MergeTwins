@@ -46,7 +46,6 @@ namespace Rodser.MergeTwins
 
         internal static void RiasingLevel(object sender)
         {
-            StartGame();
             OnRiasingLevelEvent?.Invoke(sender);
         }
     }
