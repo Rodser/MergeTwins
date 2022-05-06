@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Rodser.MergeTwins.UI
 {
-    public class CoinUI : MonoBehaviour
+    public class CoinUI : MonoBehaviour, ISaveable
     {
         [SerializeField] private TextMeshProUGUI textCoin = null;
 
@@ -28,6 +28,16 @@ namespace Rodser.MergeTwins.UI
         {
             this.coin += profit;
             this.textCoin.text = this.coin.ToString();
+        }
+
+        public void Save()
+        {
+            PlayerPrefs.SetInt("coin", coin);
+        }
+
+        public void Load()
+        {
+            coin = PlayerPrefs.GetInt("coin");
         }
     }
 }

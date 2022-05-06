@@ -1,14 +1,12 @@
 using Rodser.MergeTwins.Items;
 using Rodser.MergeTwins.UI;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Rodser.MergeTwins
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour, ISaveable
     {
         [SerializeField] private LevelManager[] levels;
         [SerializeField] private Grid grid = null;
@@ -27,6 +25,7 @@ namespace Rodser.MergeTwins
             Game.GameManager = this;
             currentLevel = levels[currentLevelIndex];
             DontDestroyOnLoad(this);
+            Load();
         }
 
         public void StartLevel()
@@ -60,6 +59,7 @@ namespace Rodser.MergeTwins
         internal void RaisingCurrentLevel()
         {
             currentLevel = levels[++currentLevelIndex];
+            Save();
         }
 
         private IEnumerator RaisingTheLevelRoutine(bool levelUp)
@@ -77,6 +77,22 @@ namespace Rodser.MergeTwins
                 Debug.Log("Victory!");
                 Game.Victory(this);
             }
+        }
+
+        public void Save()
+        {
+            sceneUI.CoinUI.Save();
+            PlayerPrefs.SetInt("level", currentLevelItem);
+            PlayerPrefs.Save();
+            Debug.Log("Save!");
+        }
+
+        public void Load()
+        {
+            sceneUI.CoinUI.Load();
+            currentLevelIndex = PlayerPrefs.GetInt("level");
+            currentLevel = levels[currentLevelIndex];
+            Debug.Log("Load!");
         }
     }
 }
