@@ -20,4 +20,4 @@ MonoBehaviour:
   cell: {fileID: 11400000, guid: e2c8897ecd20dc34f925315f6344c798, type: 2}
   startCountItems: 1
   timeBetweenSpawn: 1
-  timeToDefeat: 5
+  timeToDefeat: 9

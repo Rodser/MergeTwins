@@ -4,7 +4,7 @@ namespace Rodser.MergeTwins
 {
     public class DragObject : MonoBehaviour
     {
-        [SerializeField] private new Collider collider = null;
+        [SerializeField] private Collider colliderDrag = null;
         [SerializeField] private Vector3 jumpHeight;
 
         private Vector3 startPosition;
@@ -20,7 +20,7 @@ namespace Rodser.MergeTwins
         {
             this.startPosition = this.transform.position;
             this.transform.position += jumpHeight;
-            this.collider.isTrigger = true;
+            this.colliderDrag.isTrigger = true;
             this.positionScreen = Camera.main.WorldToScreenPoint(this.transform.position);
             this.offset = this.transform.position - GetMouseWorldPosition();
         }
@@ -33,7 +33,7 @@ namespace Rodser.MergeTwins
         private void OnMouseUp()
         {
             this.transform.position = this.startPosition;
-            this.collider.isTrigger = false;
+            this.colliderDrag.isTrigger = false;
         }
 
         private Vector3 GetMouseWorldPosition()

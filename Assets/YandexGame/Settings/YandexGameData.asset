@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scopes: 1
   playerPhotoSize: 0
-  leaderboardEnable: 1
+  leaderboardEnable: 0
   checkAdblock: 1
   LocalizationEnable: 1
   autolocationInspector: 1
@@ -40,7 +40,7 @@ MonoBehaviour:
     uk: 0
     uz: 0
   fonts:
-    defaultFont: {fileID: 0}
+    defaultFont: {fileID: 12800000, guid: 82cc91725ab2f0c41920038a250d768b, type: 3}
     ru: {fileID: 0}
     en: {fileID: 0}
     tr: {fileID: 0}
@@ -60,4 +60,4 @@ MonoBehaviour:
     tk: {fileID: 0}
     uk: {fileID: 0}
     uz: {fileID: 0}
-  debug: 1
+  debug: 0

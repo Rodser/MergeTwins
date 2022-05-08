@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74118dc6cb354599be7346d0d389d775, type: 3}
-  m_Name: Level 2
+  m_Name: Level 7
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: 73de0089b83ebc7499b556cee6c184fb, type: 2}
   - {fileID: 11400000, guid: b3f0ec14975e2d64ba6b25c3cd7b927e, type: 2}
   - {fileID: 11400000, guid: 21d2b1476ad1e7544b224bed62c3c6b1, type: 2}
-  width: 2
-  height: 2
-  cell: {fileID: 11400000, guid: 2cab3ba6899a7b74b880c400879eebed, type: 2}
-  startCountItems: 1
+  - {fileID: 11400000, guid: 23dcc5a401ecaf84e81db19455a0b955, type: 2}
+  - {fileID: 11400000, guid: 65b5e99bc8f65cd46bcc186c4f6ffda0, type: 2}
+  - {fileID: 11400000, guid: 319ccff9b83f85c43a0658e1e42bd567, type: 2}
+  - {fileID: 11400000, guid: b302986beba32984c93ba58fd865a2c1, type: 2}
+  - {fileID: 11400000, guid: c2c6fb6b9938f784fb689ac2007a3b82, type: 2}
+  width: 3
+  height: 3
+  cell: {fileID: 11400000, guid: e2c8897ecd20dc34f925315f6344c798, type: 2}
+  startCountItems: 3
   timeBetweenSpawn: 1
-  timeToDefeat: 9
+  timeToDefeat: 4

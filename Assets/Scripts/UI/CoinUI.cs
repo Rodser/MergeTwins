@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using YG;
 using UnityEngine;
 
 namespace Rodser.MergeTwins.UI
@@ -32,12 +33,12 @@ namespace Rodser.MergeTwins.UI
 
         public void Save()
         {
-            PlayerPrefs.SetInt("coin", coin);
+            YandexGame.savesData.money = coin;
         }
 
         public void Load()
         {
-            coin = PlayerPrefs.GetInt("coin");
+            coin = YandexGame.savesData.money;
         }
     }
 }

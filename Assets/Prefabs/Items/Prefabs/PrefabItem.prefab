@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b4741966df4119b5a9745e6f2e0078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 4024600768274971129}
+  colliderItem: {fileID: 4024600768274971129}
   animator: {fileID: 3505367726676952657}
   timeOfMerge: 0.4
   speedMove: 0.4
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08fe5c200e44be688af80ad54efa2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 4024600768274971129}
+  colliderDrag: {fileID: 4024600768274971129}
   jumpHeight: {x: 0, y: 0.3, z: 0}
 --- !u!95 &3505367726676952657
 Animator:

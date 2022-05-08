@@ -882,6 +882,7 @@ namespace YG
                     // Ваши сохранения
                     public int money = 1;
                     public string newPlayerName = "Hello!";
+                    public int indexLevel = 0;
                     public bool[] openLevels = new bool[3];
                 }
         #endregion Json

@@ -6,7 +6,7 @@ namespace Rodser.MergeTwins.Items
 {
     public class Item : MonoBehaviour
     {
-        [SerializeField] private new Collider collider = null;
+        [SerializeField] private Collider colliderItem = null;
         [SerializeField] private Animator animator = null;
         
         [Header("Parameters of merge")]
@@ -21,7 +21,7 @@ namespace Rodser.MergeTwins.Items
         private float journeyLength = 0f;
         private Vector3 otherPosition;
 
-        public Collider Collider => collider;
+        public Collider Collider => colliderItem;
         public Animator Animator => animator;
         public bool HasMerged { get; set; } = false;
 
@@ -43,7 +43,7 @@ namespace Rodser.MergeTwins.Items
         {
             Item otherItem = other.gameObject.GetComponent<Item>();
             
-            if (otherItem == null || !otherItem.Collider.isTrigger)
+            if (otherItem == null || !Game.IsPlaying || !otherItem.Collider.isTrigger)
             {
                 return;
             }
@@ -109,7 +109,7 @@ namespace Rodser.MergeTwins.Items
         private void ShutOffColliders(Item otherItem)
         {
             otherItem.Collider.enabled = false;
-            this.collider.enabled = false;
+            this.colliderItem.enabled = false;
         }
     }
 }

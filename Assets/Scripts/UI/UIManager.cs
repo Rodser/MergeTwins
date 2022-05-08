@@ -18,6 +18,8 @@ namespace Rodser.MergeTwins.UI
 
         private void Start()
         {
+            SetStartConfig();
+            this.menu.gameObject.SetActive(true);
             this.buttonMenu.Button.onClick.AddListener(GetMenu);
         }
 
