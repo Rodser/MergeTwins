@@ -10,9 +10,7 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private ButtonUI buttonMenu = null;
         [SerializeField] private NextUI nextUI = null;
         [SerializeField] private VictoryUI victoryUI = null;
-
-        [SerializeField] private AudioSource clickSound = null;
-        
+                
         public Menu Menu => menu;
         public CoinUI CoinUI => coinUI;
 
@@ -20,12 +18,12 @@ namespace Rodser.MergeTwins.UI
         {
             SetStartConfig();
             this.menu.gameObject.SetActive(true);
+            this.buttonMenu.gameObject.SetActive(false);
             this.buttonMenu.Button.onClick.AddListener(GetMenu);
         }
 
         private void OnEnable()
         {
-            Game.OnClickButtonEvent += OnClickSound;
             Game.OnGameOverEvent += GameOver;
             Game.OnRiasingLevelEvent += NextLevel;
             Game.OnVictoryEvent += Victory;
@@ -33,7 +31,6 @@ namespace Rodser.MergeTwins.UI
 
         private void OnDisable()
         {
-            Game.OnClickButtonEvent -= OnClickSound;
             Game.OnGameOverEvent -= GameOver;
             Game.OnRiasingLevelEvent -= NextLevel;
             Game.OnVictoryEvent -= Victory;
@@ -65,7 +62,7 @@ namespace Rodser.MergeTwins.UI
 
         private void GetMenu()
         {
-            OnClickSound(this);
+            Game.OnClickButton(this);
             this.menu.gameObject.SetActive(true);
             this.menu.SetButtonMenu();
             this.buttonMenu.gameObject.SetActive(false);
@@ -74,15 +71,10 @@ namespace Rodser.MergeTwins.UI
 
         private void GameOver()
         {
-            OnClickSound(this);
+            Game.OnClickButton(this);
             this.gameOverUI.gameObject.SetActive(true);
             this.buttonMenu.gameObject.SetActive(false);
             Time.timeScale = 0;
-        }
-
-        private void OnClickSound(object sender)
-        {
-            this.clickSound.Play();
         }
     }
 }

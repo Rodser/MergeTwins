@@ -2,7 +2,6 @@
 using UnityEditor;
 #endif
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Rodser.MergeTwins.UI
@@ -12,9 +11,7 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private Button playButton = null;
         [SerializeField] private Button resetButton = null;
         [SerializeField] private Button exitButton = null;
-
-        [SerializeField] private AudioSource sound = null;
-        [SerializeField] private AudioSource music = null;
+        [Space(2f)]
         [SerializeField] private Slider soundSlider = null;
         [SerializeField] private Slider musicSlider = null;
                 
@@ -32,12 +29,12 @@ namespace Rodser.MergeTwins.UI
 
         public void OnValueChangedSound(float value)
         {
-            sound.volume = soundSlider.value;
+            Game.AudioManager.OnValueChangedSound(soundSlider.value);
         }
 
         public void OnValueChangedMusic(float value)
         {
-            music.volume = musicSlider.value;
+            Game.AudioManager.OnValueChangedMusic(musicSlider.value);
         }
 
         public void SetButtonMenu()

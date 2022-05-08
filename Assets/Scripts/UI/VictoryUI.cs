@@ -1,3 +1,4 @@
+using Rodser.MergeTwins;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,5 +14,10 @@ public class VictoryUI : MonoBehaviour
     private void PlayInfinityLevel()
     {
         Debug.Log("Infinity");
+        Time.timeScale = 1;
+        Game.GameManager.SceneUI.SetStartConfig();
+        this.gameObject.SetActive(false);
+        Game.OnClickButton(this);
+        Game.IsPlaying = true;
     }
 }

@@ -44,6 +44,8 @@ namespace Rodser.MergeTwins
                                  currentLevel.StartCountItems, 
                                  currentLevel.TimeBetweenSpawn, 
                                  currentLevel.TimeToDefeat);
+            sceneUI.gameObject.SetActive(false);
+            sceneUI.gameObject.SetActive(true);
         }
 
         public ItemAsset GetItem(int levelItem)
