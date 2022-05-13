@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Item4
   m_EditorClassIdentifier: 
   levelItem: 4
-  profit: 40
+  profit: 25
   prefab: {fileID: 8559664174468222783, guid: 1264b4e9dbe91144ea5943b150b0d712, type: 3}

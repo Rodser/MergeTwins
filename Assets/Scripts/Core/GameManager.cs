@@ -13,7 +13,7 @@ namespace Rodser.MergeTwins
         [SerializeField] private Grid grid = null;
         [SerializeField] private UIManager sceneUI = null;
         [SerializeField] private YandexGame yg = null;
-        [Space(2f)]
+        [Space(8f)]
         [SerializeField] private float timeToWin = 0.5f;
 
         public UIManager SceneUI => sceneUI;
@@ -22,11 +22,14 @@ namespace Rodser.MergeTwins
         private int currentLevelIndex = 0;
         private int currentLevelItem = 0;
         private int indexScene = 1;
+        public bool[] openLevels = null;
 
         private void Awake()
         {
             Game.GameManager = this;
             DontDestroyOnLoad(this);
+            openLevels = new bool[levels.Length];
+            openLevels[currentLevelIndex] = true;
         }
 
         private void OnEnable() => YandexGame.GetDataEvent += Load;
@@ -46,11 +49,22 @@ namespace Rodser.MergeTwins
                                  currentLevel.TimeToDefeat);
             sceneUI.gameObject.SetActive(false);
             sceneUI.gameObject.SetActive(true);
+            sceneUI.SetLevelText(currentLevelIndex);
         }
 
         public ItemAsset GetItem(int levelItem)
         {
             return currentLevel.GetItem(levelItem);
+        }
+
+        public int GetMultiplier()
+        {
+            return currentLevel.MoneyMultiplier;
+        }
+
+        public void ClearLevel()
+        {
+            this.currentLevelIndex = 0; 
         }
 
         internal void RaisingTheLevel()
@@ -76,6 +90,7 @@ namespace Rodser.MergeTwins
         private IEnumerator RaisingTheLevelRoutine(bool levelUp)
         {
             Game.IsPlaying = false;
+            openLevels[++currentLevelIndex] = true;
             yield return new WaitForSeconds(timeToWin);
 
             this.yg._FullscreenShow();
@@ -95,6 +110,7 @@ namespace Rodser.MergeTwins
         {
             sceneUI.CoinUI.Save();
             YandexGame.savesData.indexLevel = currentLevelIndex;
+            YandexGame.savesData.openLevels = openLevels;
             YandexGame.SaveProgress();
             Debug.Log("Save!");
         }
@@ -103,7 +119,9 @@ namespace Rodser.MergeTwins
         {
             sceneUI.CoinUI.Load();
             currentLevelIndex = YandexGame.savesData.indexLevel;
+            openLevels = YandexGame.savesData.openLevels;
             Debug.Log("Load!");
+            sceneUI.SetLevelText(currentLevelIndex);
         }
     }
 }

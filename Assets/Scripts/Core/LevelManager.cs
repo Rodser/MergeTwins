@@ -7,12 +7,13 @@ namespace Rodser.MergeTwins
     public class LevelManager : ScriptableObject
     {
         [SerializeField] private ItemAsset[] items = null;
-
+        [SerializeField] private int moneyMultiplier = 1;
+        [Space(10)]
         [Header("Configuration of Grid")]
         [SerializeField] private int width = 3;
         [SerializeField] private int height = 3;
         [SerializeField] private CellAsset cell = null;
-
+        [Space(10)]
         [Header("Start configuration")]
         [SerializeField] private int startCountItems = 1;
         [SerializeField] private float timeBetweenSpawn = 1f;
@@ -24,6 +25,7 @@ namespace Rodser.MergeTwins
         public int StartCountItems => startCountItems;
         public float TimeBetweenSpawn => timeBetweenSpawn;
         public float TimeToDefeat => timeToDefeat;
+        public int MoneyMultiplier => moneyMultiplier;
 
         public ItemAsset GetItem(int levelItem)
         {

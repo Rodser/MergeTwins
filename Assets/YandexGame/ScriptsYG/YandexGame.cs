@@ -880,10 +880,10 @@ namespace YG
                     public string language = "ru";
 
                     // Ваши сохранения
-                    public int money = 1;
+                    public int money = 0;
                     public string newPlayerName = "Hello!";
                     public int indexLevel = 0;
-                    public bool[] openLevels = new bool[3];
+                    public bool[] openLevels = new bool[20];
                 }
         #endregion Json
     }

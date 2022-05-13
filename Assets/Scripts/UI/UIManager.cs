@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Rodser.MergeTwins.UI
 {
@@ -10,6 +13,9 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private ButtonUI buttonMenu = null;
         [SerializeField] private NextUI nextUI = null;
         [SerializeField] private VictoryUI victoryUI = null;
+        [Space(10)]
+        [SerializeField] private TextMeshProUGUI levelText = null;
+        [SerializeField] private Button clearLevelButton = null;
                 
         public Menu Menu => menu;
         public CoinUI CoinUI => coinUI;
@@ -20,6 +26,12 @@ namespace Rodser.MergeTwins.UI
             this.menu.gameObject.SetActive(true);
             this.buttonMenu.gameObject.SetActive(false);
             this.buttonMenu.Button.onClick.AddListener(GetMenu);
+            this.clearLevelButton.onClick.AddListener(ClearLevel);
+        }
+
+        private void ClearLevel()
+        {
+            Game.GameManager.ClearLevel();
         }
 
         private void OnEnable()
@@ -44,6 +56,11 @@ namespace Rodser.MergeTwins.UI
             this.nextUI.gameObject.SetActive(false);
             this.victoryUI.gameObject.SetActive(false);
             this.buttonMenu.gameObject.SetActive(true);
+        }
+
+        public void SetLevelText(int index)
+        {
+            this.levelText.text = index.ToString();
         }
 
         private void NextLevel(object sender)

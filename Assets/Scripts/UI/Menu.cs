@@ -11,7 +11,7 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private Button playButton = null;
         [SerializeField] private Button resetButton = null;
         [SerializeField] private Button exitButton = null;
-        [Space(2f)]
+        [Space(8f)]
         [SerializeField] private Slider soundSlider = null;
         [SerializeField] private Slider musicSlider = null;
                 

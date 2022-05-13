@@ -12,6 +12,11 @@ namespace Rodser.MergeTwins.UI
         
         private void Start()
         {
+            SetCoinText();
+        }
+
+        private void SetCoinText()
+        {
             this.textCoin.text = this.coin.ToString();
         }
 
@@ -27,7 +32,7 @@ namespace Rodser.MergeTwins.UI
 
         private void Profit(object sender, int profit)
         {
-            this.coin += profit;
+            this.coin += profit * Game.GameManager.GetMultiplier();
             this.textCoin.text = this.coin.ToString();
         }
 
@@ -39,6 +44,7 @@ namespace Rodser.MergeTwins.UI
         public void Load()
         {
             coin = YandexGame.savesData.money;
+            SetCoinText();
         }
     }
 }
