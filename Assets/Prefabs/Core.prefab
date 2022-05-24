@@ -348,7 +348,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6938480731725464983}
   - component: {fileID: 1657773711}
-  - component: {fileID: 1657773712}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -409,23 +408,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3454d34c06f7a9848b953e6d381d9301, type: 2}
   - {fileID: 11400000, guid: c82e2eeaa248ff64ab972d5656f52afc, type: 2}
   - {fileID: 11400000, guid: ecda3aef3220daa42a0cfd429c269c08, type: 2}
-  grid: {fileID: 1657773712}
+  gridAsset: {fileID: 11400000, guid: 2369f54b8bdafd240b0c88eea7cff0fe, type: 2}
   sceneUI: {fileID: 589761100543140952}
   yg: {fileID: 7820266391926818586}
   timeToWin: 1
---- !u!114 &1657773712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6938480731725464968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02b9388b93aa5b74dadf0ee45a43da74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spaceBetweenCells: 1.1
+  openLevels: 
 --- !u!1 &6938480731767915734
 GameObject:
   m_ObjectHideFlags: 0

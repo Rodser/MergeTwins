@@ -8,9 +8,7 @@ using Rodser.MergeTwins.Grounds;
 namespace Rodser.MergeTwins
 {
 	public class Grid : MonoBehaviour
-	{
-        [SerializeField] private float spaceBetweenCells = 2f;
-        
+	{        
         private int width = 1;
         private int height = 1;
         private CellAsset cellAsset = null;
@@ -18,20 +16,16 @@ namespace Rodser.MergeTwins
         private int startCountItems = 1;        
         private float timeBetweenSpawn = 1f;
         private float timeToDefeat = 1f;
+        private float spaceBetweenCells = 0f;
 
         private float currentTimeToDefeat = 0f;
         private Ground[] grid = null;
         private bool hasCompiled = false;
         private bool isFilled = false;
 
-        public void CreateGrid(int width, int height, CellAsset cell, ItemAsset startItem, int startCount, float timeSpawn, float timeToDefeat)
+        public void BuildGrid(int width, int height, CellAsset cell, ItemAsset startItem, int startCount, float timeSpawn, float timeToDefeat)
         {
-            if(grid != null)
-            {
-                Remove();
-            }
             this.hasCompiled = false;
-
             this.width = width;
             this.height = height;
             this.cellAsset = cell;
@@ -75,6 +69,11 @@ namespace Rodser.MergeTwins
                 yield return new WaitForSeconds(this.timeBetweenSpawn);
                 SpawnItems(1);
             }
+        }
+
+        internal void SetSpace(float spaceBetweenCells)
+        {
+            this.spaceBetweenCells = spaceBetweenCells;
         }
 
         private IEnumerator BuilderGridRoutine()
@@ -137,13 +136,19 @@ namespace Rodser.MergeTwins
             this.grid[grounds[lucky].Number].SpawnItem(this.startItemAsset);
         }
 
-        private void Remove()
+        internal void Remove()
         {
-            for (int i = 0; i < grid.Length; i++)
+            if(this.grid is null)
             {
-                grid[i].Remove();
+                return;
             }
-            grid = null;
+
+            for (int i = 0; i < this.grid.Length; i++)
+            {
+                this.grid[i].Remove();
+            }
+
+            this.grid = null;
             this.isFilled = false;
         }
     }

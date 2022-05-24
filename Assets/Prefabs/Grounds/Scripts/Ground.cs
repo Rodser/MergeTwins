@@ -1,10 +1,13 @@
 ﻿using Rodser.MergeTwins.Items;
+using System;
 using UnityEngine;
 
 namespace Rodser.MergeTwins.Grounds
 {
     public class Ground : MonoBehaviour
     {
+        public event Action<object> OnRemoveEvent;
+
         [SerializeField] private ParticleSystem mergeEffect = null;
 
         private Vector3 position;
@@ -23,6 +26,7 @@ namespace Rodser.MergeTwins.Grounds
 
         internal void Remove()
         {
+            OnRemoveEvent?.Invoke(this);
             Destroy(gameObject);
         }
 

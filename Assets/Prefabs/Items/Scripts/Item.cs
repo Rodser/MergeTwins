@@ -37,6 +37,13 @@ namespace Rodser.MergeTwins.Items
         {
             this.parent = parent;
             this.parentGround = parentGround;
+            this.parentGround.OnRemoveEvent += Remove;
+        }
+
+        private void Remove(object sender)
+        {
+            Debug.Log($"{sender} destruction {this.name}");
+            Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -79,8 +86,15 @@ namespace Rodser.MergeTwins.Items
         private void DestroyItems(Item otherItem)
         {
             otherItem.parentGround.BecomeFree();
+            Unsubscribe();
+            otherItem.Unsubscribe();
             Destroy(otherItem.gameObject);
             Destroy(this.gameObject);
+        }
+
+        private void Unsubscribe()
+        {
+            this.parentGround.OnRemoveEvent -= Remove;
         }
 
         private void AnimateMerge(Item otherItem)

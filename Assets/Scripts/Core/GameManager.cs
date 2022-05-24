@@ -2,7 +2,6 @@ using Rodser.MergeTwins.Items;
 using Rodser.MergeTwins.UI;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using YG;
 
 namespace Rodser.MergeTwins
@@ -10,26 +9,26 @@ namespace Rodser.MergeTwins
     public class GameManager : MonoBehaviour, ISaveable
     {
         [SerializeField] private LevelManager[] levels;
-        [SerializeField] private Grid grid = null;
+        [SerializeField] private GridAsset gridAsset = null;
         [SerializeField] private UIManager sceneUI = null;
         [SerializeField] private YandexGame yg = null;
         [Space(8f)]
         [SerializeField] private float timeToWin = 0.5f;
 
-        public UIManager SceneUI => sceneUI;
 
+        private Grid grid = null;
         private LevelManager currentLevel = null;
         private int currentLevelIndex = 0;
         private int currentLevelItem = 0;
-        private int indexScene = 1;
+        
+        public UIManager SceneUI => sceneUI;
         public bool[] openLevels = null;
 
         private void Awake()
         {
             Game.GameManager = this;
-            DontDestroyOnLoad(this);
-            openLevels = new bool[levels.Length];
-            openLevels[currentLevelIndex] = true;
+            this.openLevels = new bool[this.levels.Length];
+            this.openLevels[this.currentLevelIndex] = true;
         }
 
         private void OnEnable() => YandexGame.GetDataEvent += Load;
@@ -37,29 +36,47 @@ namespace Rodser.MergeTwins
 
         public void StartLevel()
         {
-            SceneManager.LoadSceneAsync(indexScene);
+            RemoveOldGrid();
+            CreateGrid();
             Time.timeScale = 1;
-            currentLevel = levels[currentLevelIndex];
-            this.grid.CreateGrid(currentLevel.Width, 
-                                 currentLevel.Height, 
-                                 currentLevel.Cell, 
-                                 GetItem(currentLevelItem), 
-                                 currentLevel.StartCountItems, 
-                                 currentLevel.TimeBetweenSpawn, 
-                                 currentLevel.TimeToDefeat);
-            sceneUI.gameObject.SetActive(false);
-            sceneUI.gameObject.SetActive(true);
-            sceneUI.SetLevelText(currentLevelIndex);
+            this.currentLevel = levels[this.currentLevelIndex];
+            this.grid.BuildGrid(this.currentLevel.Width,
+                                 this.currentLevel.Height,
+                                 this.currentLevel.Cell,
+                                 GetItem(this.currentLevelItem),
+                                 this.currentLevel.StartCountItems,
+                                 this.currentLevel.TimeBetweenSpawn,
+                                 this.currentLevel.TimeToDefeat);
+            this.sceneUI.gameObject.SetActive(false);
+            this.sceneUI.gameObject.SetActive(true);
+            this.sceneUI.SetLevelText(this.currentLevelIndex);
+        }
+
+        private void RemoveOldGrid()
+        {
+            if (this.grid != null)
+            {
+                this.grid.Remove();
+            }
+        }
+
+        private void CreateGrid()
+        {
+            if (this.grid is null)
+            {
+                this.grid = new GameObject("Grid").AddComponent<Grid>();
+                this.grid.SetSpace(this.gridAsset.SpaceBetweenCells);
+            }
         }
 
         public ItemAsset GetItem(int levelItem)
         {
-            return currentLevel.GetItem(levelItem);
+            return this.currentLevel.GetItem(levelItem);
         }
 
         public int GetMultiplier()
         {
-            return currentLevel.MoneyMultiplier;
+            return this.currentLevel.MoneyMultiplier;
         }
 
         public void ClearLevel()
@@ -69,31 +86,35 @@ namespace Rodser.MergeTwins
 
         internal void RaisingTheLevel()
         {
-            if (currentLevelIndex == levels.Length - 1)
+            if (this.currentLevelIndex == this.levels.Length - 1)
             {
                 StartCoroutine(RaisingTheLevelRoutine(false));
                 Debug.Log("last Level");
             }
             else
             {
-                Debug.Log($"currentLevelIndex : {currentLevelIndex}");
+                Debug.Log($"currentLevelIndex : {this.currentLevelIndex}");
                 StartCoroutine(RaisingTheLevelRoutine(true));
             }
         }
 
         internal void RaisingCurrentLevel()
         {
-            currentLevel = levels[++currentLevelIndex];
+            this.currentLevel = this.levels[++this.currentLevelIndex];
             Save();
         }
 
         private IEnumerator RaisingTheLevelRoutine(bool levelUp)
         {
             Game.IsPlaying = false;
-            openLevels[++currentLevelIndex] = true;
-            yield return new WaitForSeconds(timeToWin);
+            this.openLevels[this.currentLevelIndex + 1] = true;
+            yield return new WaitForSeconds(this.timeToWin);
 
-            this.yg._FullscreenShow();
+            if (yg != null)
+            {
+                this.yg._FullscreenShow();
+            }
+
             if (levelUp)
             {
                 Debug.Log("Win!!");
@@ -108,20 +129,20 @@ namespace Rodser.MergeTwins
 
         public void Save()
         {
-            sceneUI.CoinUI.Save();
-            YandexGame.savesData.indexLevel = currentLevelIndex;
-            YandexGame.savesData.openLevels = openLevels;
+            this.sceneUI.CoinUI.Save();
+            YandexGame.savesData.indexLevel = this.currentLevelIndex;
+            YandexGame.savesData.openLevels = this.openLevels;
             YandexGame.SaveProgress();
             Debug.Log("Save!");
         }
 
         public void Load()
         {
-            sceneUI.CoinUI.Load();
-            currentLevelIndex = YandexGame.savesData.indexLevel;
-            openLevels = YandexGame.savesData.openLevels;
+            this.sceneUI.CoinUI.Load();
+            this.currentLevelIndex = YandexGame.savesData.indexLevel;
+            this.openLevels = YandexGame.savesData.openLevels;
             Debug.Log("Load!");
-            sceneUI.SetLevelText(currentLevelIndex);
+            this.sceneUI.SetLevelText(this.currentLevelIndex);
         }
     }
 }
