@@ -15,6 +15,7 @@ namespace Rodser.MergeTwins
         [Space(8f)]
         [SerializeField] private float timeToWin = 0.5f;
 
+        public int idReward = 1;
 
         private Grid grid = null;
         private LevelManager currentLevel = null;
@@ -23,6 +24,7 @@ namespace Rodser.MergeTwins
         
         public UIManager SceneUI => sceneUI;
         public bool[] openLevels = null;
+        public YandexGame YG => yg;
 
         private void Awake()
         {
@@ -100,8 +102,10 @@ namespace Rodser.MergeTwins
 
         internal void RaisingCurrentLevel()
         {
-            this.currentLevel = this.levels[++this.currentLevelIndex];
-            Save();
+            this.currentLevelIndex++;
+            this.currentLevel = this.levels[this.currentLevelIndex];
+            Debug.Log("level = " + currentLevelIndex);
+            // Save();
         }
 
         private IEnumerator RaisingTheLevelRoutine(bool levelUp)
