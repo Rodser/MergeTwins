@@ -1,5 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -19,6 +20,9 @@ namespace Rodser.MergeTwins.UI
             this.play.onClick.AddListener(PlayOn);
         }
 
+        private void OnEnable() => YandexGame.CloseVideoEvent += ContinuePlay;
+        private void OnDisable() => YandexGame.CloseVideoEvent -= ContinuePlay;
+
         private void ReplayLevel()
         {
             Debug.Log("Load Scene");
@@ -31,19 +35,24 @@ namespace Rodser.MergeTwins.UI
         {
             Debug.Log("RewardedShow");
             Game.OnClickButton(this);
-            Game.GameManager.YG._RewardedShow(Game.GameManager.idReward);
-            YandexGame.CloseVideoEvent += PlayInfinityLevel;
+            Game.GameManager.YG._RewardedShow(Game.GameManager.IdReward);
+#if UNITY_EDITOR
+            ContinuePlay(Game.GameManager.IdReward);
+            Game.GameManager.ContinuePlay();
+#endif
         }
 
-        private void PlayInfinityLevel(int id)
+        private void ContinuePlay(int id)
         {
-            if (id == Game.GameManager.idReward)
+            Debug.Log("RewardClose " + id);
+
+            if (id == Game.GameManager.IdReward)
             {
                 Debug.Log("RewardClose");
-                Time.timeScale = 1;
                 Game.GameManager.SceneUI.SetStartConfig();
-                this.gameObject.SetActive(false);
                 Game.IsPlaying = true;
+                Time.timeScale = 1;
+                this.gameObject.SetActive(false);
             }
         }
 

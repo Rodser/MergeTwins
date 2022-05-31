@@ -42,10 +42,11 @@ namespace Rodser.MergeTwins
         {
             if (this.isFilled && Game.IsPlaying)
             {
-                currentTimeToDefeat += Time.deltaTime;
-                if (currentTimeToDefeat >= this.timeToDefeat)
+                Game.GameManager.SceneUI.ShowTimer(this.currentTimeToDefeat, this.timeToDefeat);
+                this.currentTimeToDefeat += Time.deltaTime;
+                if (this.currentTimeToDefeat >= this.timeToDefeat)
                 {
-                    hasCompiled = false;
+                    this.hasCompiled = false;
                     Game.GameOver();
                 }
             }
@@ -53,7 +54,7 @@ namespace Rodser.MergeTwins
 
         private IEnumerator SpawnItemsRoutine()
         {
-            while (!hasCompiled)
+            while (!this.hasCompiled)
             {
                 yield return null;
             }
@@ -64,10 +65,20 @@ namespace Rodser.MergeTwins
 
         private IEnumerator SpawnItemRepeatRoutine()
         {
-            while (hasCompiled)
+            while (this.hasCompiled)
             {
                 yield return new WaitForSeconds(this.timeBetweenSpawn);
                 SpawnItems(1);
+            }
+        }
+
+        internal void ContinuePlay(int id)
+        {
+            if (id == Game.GameManager.IdReward)
+            {
+                Debug.Log("ResetTimer");
+                this.hasCompiled = true;
+                ResetTimer();
             }
         }
 
@@ -102,8 +113,8 @@ namespace Rodser.MergeTwins
                 z = z * this.spaceBetweenCells
             };
 
-            cellAsset.Initialization(positionCell, this.transform, number);
-            this.grid[number] = cellAsset.CurrentGround;
+            this.cellAsset.Initialization(positionCell, this.transform, number);
+            this.grid[number] = this.cellAsset.CurrentGround;
         }
 
         private void SpawnItems(int countItems)
@@ -128,12 +139,20 @@ namespace Rodser.MergeTwins
                 this.isFilled = true;
                 return;
             }
-
-            this.isFilled = false;
-            this.currentTimeToDefeat = 0f;
+            else
+            {
+                ResetTimer();
+            }
 
             int lucky = UnityEngine.Random.Range(0, grounds.Count);
             this.grid[grounds[lucky].Number].SpawnItem(this.startItemAsset);
+        }
+
+        private void ResetTimer()
+        {
+            Game.GameManager.SceneUI.OnTimer(false);
+            this.isFilled = false;
+            this.currentTimeToDefeat = 0f;
         }
 
         internal void Remove()

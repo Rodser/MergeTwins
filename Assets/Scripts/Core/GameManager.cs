@@ -14,17 +14,17 @@ namespace Rodser.MergeTwins
         [SerializeField] private YandexGame yg = null;
         [Space(8f)]
         [SerializeField] private float timeToWin = 0.5f;
-
-        public int idReward = 1;
+        [SerializeField] private int idReward = 1;
 
         private Grid grid = null;
         private LevelManager currentLevel = null;
         private int currentLevelIndex = 0;
         private int currentLevelItem = 0;
+        private bool[] openLevels = null;
         
         public UIManager SceneUI => sceneUI;
-        public bool[] openLevels = null;
         public YandexGame YG => yg;
+        public int IdReward => idReward;
 
         private void Awake()
         {
@@ -54,23 +54,6 @@ namespace Rodser.MergeTwins
             this.sceneUI.SetLevelText(this.currentLevelIndex);
         }
 
-        private void RemoveOldGrid()
-        {
-            if (this.grid != null)
-            {
-                this.grid.Remove();
-            }
-        }
-
-        private void CreateGrid()
-        {
-            if (this.grid is null)
-            {
-                this.grid = new GameObject("Grid").AddComponent<Grid>();
-                this.grid.SetSpace(this.gridAsset.SpaceBetweenCells);
-            }
-        }
-
         public ItemAsset GetItem(int levelItem)
         {
             return this.currentLevel.GetItem(levelItem);
@@ -85,6 +68,31 @@ namespace Rodser.MergeTwins
         {
             this.currentLevelIndex = 0; 
         }
+
+        public void Save()
+        {
+            this.sceneUI.CoinUI.Save();
+            YandexGame.savesData.indexLevel = this.currentLevelIndex;
+            YandexGame.savesData.openLevels = this.openLevels;
+            YandexGame.SaveProgress();
+            Debug.Log("Save!");
+        }
+
+        public void Load()
+        {
+            this.sceneUI.CoinUI.Load();
+            this.currentLevelIndex = YandexGame.savesData.indexLevel;
+            this.openLevels = YandexGame.savesData.openLevels;
+            Debug.Log("Load!");
+            this.sceneUI.SetLevelText(this.currentLevelIndex);
+        }
+
+#if UNITY_EDITOR
+        internal void ContinuePlay()
+        {
+            this.grid.ContinuePlay(Game.GameManager.IdReward);
+        }
+#endif
 
         internal void RaisingTheLevel()
         {
@@ -104,8 +112,27 @@ namespace Rodser.MergeTwins
         {
             this.currentLevelIndex++;
             this.currentLevel = this.levels[this.currentLevelIndex];
-            Debug.Log("level = " + currentLevelIndex);
-            // Save();
+            Save();
+            Debug.Log("level = " + currentLevelIndex);            
+        }
+
+        private void RemoveOldGrid()
+        {
+            if (this.grid != null)
+            {
+                this.grid.Remove();
+                YandexGame.CloseVideoEvent -= this.grid.ContinuePlay;
+            }
+        }
+
+        private void CreateGrid()
+        {
+            if (this.grid is null)
+            {
+                this.grid = new GameObject("Grid").AddComponent<Grid>();
+                this.grid.SetSpace(this.gridAsset.SpaceBetweenCells);
+                YandexGame.CloseVideoEvent += this.grid.ContinuePlay;
+            }
         }
 
         private IEnumerator RaisingTheLevelRoutine(bool levelUp)
@@ -129,24 +156,6 @@ namespace Rodser.MergeTwins
                 Debug.Log("Victory!");
                 Game.Victory(this);
             }
-        }
-
-        public void Save()
-        {
-            this.sceneUI.CoinUI.Save();
-            YandexGame.savesData.indexLevel = this.currentLevelIndex;
-            YandexGame.savesData.openLevels = this.openLevels;
-            YandexGame.SaveProgress();
-            Debug.Log("Save!");
-        }
-
-        public void Load()
-        {
-            this.sceneUI.CoinUI.Load();
-            this.currentLevelIndex = YandexGame.savesData.indexLevel;
-            this.openLevels = YandexGame.savesData.openLevels;
-            Debug.Log("Load!");
-            this.sceneUI.SetLevelText(this.currentLevelIndex);
         }
     }
 }

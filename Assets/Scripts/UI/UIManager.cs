@@ -14,6 +14,7 @@ namespace Rodser.MergeTwins.UI
         [SerializeField] private VictoryUI victoryUI = null;
         [Space(10)]
         [SerializeField] private TextMeshProUGUI levelText = null;
+        [SerializeField] private TextMeshProUGUI timerText = null;
         [SerializeField] private Button clearLevelButton = null;
                 
         public Menu Menu => menu;
@@ -45,6 +46,18 @@ namespace Rodser.MergeTwins.UI
             Game.OnGameOverEvent -= GameOver;
             Game.OnRiasingLevelEvent -= NextLevel;
             Game.OnVictoryEvent -= Victory;
+        }
+
+        internal void ShowTimer(float currentTime, float timeToDefeat)
+        {
+            OnTimer(true);
+            float time = timeToDefeat - currentTime;
+            this.timerText.text = ((int)time).ToString();
+        }
+
+        internal void OnTimer(bool active)
+        {
+            this.timerText.gameObject.SetActive(active);
         }
 
         public void SetStartConfig()
